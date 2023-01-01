@@ -16,10 +16,7 @@
 
     public class Fraction
     {
-        // Числитель
         public int Numerator { get; set; }
-
-        // Знаменатель
         public int Denominator { get; set; }
 
         public Fraction(int numerator, int denominator)
