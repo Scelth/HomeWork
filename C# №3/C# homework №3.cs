@@ -1,6 +1,6 @@
 ﻿#region Класс дробь
-    Fraction f1 = new(1, 2); // 1/2
-    Fraction f2 = new(2, 3); // 2/3
+    Fraction f1 = new(1, 2);
+    Fraction f2 = new(2, 3);
 
     Fraction f3 = f1 + f2;
     Fraction f4 = f1 - f2;
