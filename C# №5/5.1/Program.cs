@@ -26,7 +26,7 @@ if (ch == 1)
     Console.Write("Enter the number of pages - ");
     readeable.Pages = Int16.Parse(Console.ReadLine());
 
-    using FileStream fs = new("Magazine.json", FileMode.OpenOrCreate);
+    using FileStream fs = new("Magazine #1.json", FileMode.OpenOrCreate);
     JsonSerializer.Serialize(fs, readeable);
 }
 #endregion
@@ -34,7 +34,7 @@ if (ch == 1)
 #region DeSerialization
 else if (ch == 2)
 {
-    using FileStream fr = new("Magazine.json", FileMode.Open);
+    using FileStream fr = new("Magazine #1.json", FileMode.Open);
 
     var mag = JsonSerializer.Deserialize<Magazine>(fr);
 
