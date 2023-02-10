@@ -15,10 +15,10 @@ namespace DZ
 
         public override string ToString()
         {
-            return $"Full Name: {FullName}\n" +
-                $"\nYear of birth: {Date}\n" +
-                $"\nAdress: {Adress}\n" +
-                $"\nSkills: {Skills}\n";
+            return $"1.  Full Name: {FullName}\n" +
+                $"\n    Year of birth: {Date}\n" +
+                $"\n    Adress: {Adress}\n" +
+                $"\n    Skills: {Skills}\n";
         }
     }
 }
