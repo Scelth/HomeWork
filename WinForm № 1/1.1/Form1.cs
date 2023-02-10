@@ -3,6 +3,7 @@ namespace DZ
     public partial class Form1 : Form
     {
         Person person = new();
+        
         public Form1()
         {
             InitializeComponent();
