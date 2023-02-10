@@ -1,5 +1,3 @@
-using System;
-
 namespace DZ
 {
     public partial class Form1 : Form
@@ -44,9 +42,8 @@ namespace DZ
             MessageBox.Show($"Full Name: {person.FullName}\n" +
                     $"Year of birth: {person.Date}\n" +
                     $"Adress: {person.Adress}\n" +
-                    $"Skills: {person.Skills}\n" +
-                    $"\nAverage number of characters {(person.FullName.Length + person.Date.Length + person.Adress.Length + person.Skills.Length) / 3}\n",
-                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    $"Skills: {person.Skills}\n",
+                    $"Average number of characters: {(person.FullName.Length + person.Date.Length + person.Adress.Length + person.Skills.Length) / 3}", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
