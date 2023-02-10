@@ -1,7 +1,10 @@
+using System;
+
 namespace DZ
 {
     public partial class Form1 : Form
     {
+        Person person = new();
         public Form1()
         {
             InitializeComponent();
@@ -12,19 +15,15 @@ namespace DZ
             if (nameTextBox.Text != String.Empty && dateTextBox.Text != String.Empty && adressTextBox.Text != String.Empty && skillTextBox.Text != String.Empty)
             {
 
-                Person person = new()
-                {
-                    FullName = nameTextBox.Text,
-                    Date = dateTextBox.Text,
-                    Adress = adressTextBox.Text,
-                    Skills = skillTextBox.Text
-                };
+                person.FullName = nameTextBox.Text;
+                person.Date = dateTextBox.Text;
+                person.Adress = adressTextBox.Text;
+                person.Skills = skillTextBox.Text;
 
                 MessageBox.Show($"Full Name: {person.FullName}\n" +
                     $"Year of birth: {person.Date}\n" +
                     $"Adress: {person.Adress}\n" +
-                    $"Skills: {person.Skills}\n" +
-                    $"\nAverage number of characters {(person.FullName.Length + person.Date.Length + person.Adress.Length + person.Skills.Length) / 2}\n");
+                    $"Skills: {person.Skills}\n", "Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 peopleListBox.Items.Add(person);
 
@@ -38,6 +37,16 @@ namespace DZ
             {
                 MessageBox.Show("Enter valid info", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void peopleListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show($"Full Name: {person.FullName}\n" +
+                    $"Year of birth: {person.Date}\n" +
+                    $"Adress: {person.Adress}\n" +
+                    $"Skills: {person.Skills}\n" +
+                    $"\nAverage number of characters {(person.FullName.Length + person.Date.Length + person.Adress.Length + person.Skills.Length) / 3}\n",
+                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
