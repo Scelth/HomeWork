@@ -13,9 +13,11 @@ namespace DZ
         public string Adress { get; set; }
         public string Skills { get; set; }
 
+        public static short count = 1;
+
         public override string ToString()
         {
-            return $"1.  Full Name: {FullName}\n" +
+            return $"{count++}.  Full Name: {FullName}\n" +
                 $"\n    Year of birth: {Date}\n" +
                 $"\n    Adress: {Adress}\n" +
                 $"\n    Skills: {Skills}\n";
