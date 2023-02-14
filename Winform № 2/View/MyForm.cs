@@ -53,6 +53,13 @@ namespace DZ
                 Person selectedPerson = (Person)peopleListBox.SelectedItem;
                 InfoForm info = new InfoForm(selectedPerson);
                 info.ShowDialog();
+
+                selectedPerson.FullName = info.person.FullName;
+                selectedPerson.Date = info.person.Date;
+                selectedPerson.Adress = info.person.Adress;
+                selectedPerson.Skills = info.person.Skills;
+
+                peopleListBox.Items[peopleListBox.SelectedIndex] = selectedPerson;
             }
         }
     }
