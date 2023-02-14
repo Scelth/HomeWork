@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,29 +13,26 @@ namespace DZ
 {
     public partial class EditForm : Form
     {
-        Person person = new();
-        public MyForm MyFormRef { get; set; } = new();
-        public EditForm(/*Person person*/)
+        public bool PersonChanged { get; private set; }
+        private Person person;
+        public EditForm(Person person)
         {
             InitializeComponent();
 
-            /*person.FullName = nameTextBox.Text;
-            person.Date = dateTextBox.Text;
-            person.Adress = adressTextBox.Text;
-            person.Skills = skillTextBox.Text;
-
-            this.person.FullName = person.FullName;
-            this.person.Date = person.Date;
-            this.person.Adress = person.Adress;
-            this.person.Skills = person.Skills;
-            */
+            this.person = person;
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            MyFormRef.person = person;
-
-            this.Close();
+            if (person.FullName != nameTextBox.Text || person.Date != dateTextBox.Text || person.Adress != adressTextBox.Text || person.Skills != skillTextBox.Text)
+            {
+                person.FullName = nameTextBox.Text;
+                person.Date = dateTextBox.Text;
+                person.Adress = adressTextBox.Text;
+                person.Skills = skillTextBox.Text;
+                PersonChanged = true;
+            }
+            Close();
         }
     }
 }
