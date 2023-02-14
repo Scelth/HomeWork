@@ -8,9 +8,9 @@ namespace DZ
 {
     public partial class MyForm : Form
     {
-        public Person person { get; set; } = new();
+        public Person person = new();
         List<Person> people = new List<Person>();
-        public static short count = 0;
+        public Person newPerson;
         public MyForm()
         {
             InitializeComponent();
@@ -28,9 +28,9 @@ namespace DZ
                     Skills = skillTextBox.Text
                 });
 
-                //person = people[count++];
+                person = people[people.Count - 1];
 
-                peopleListBox.Items.Add(people);
+                peopleListBox.Items.Add(person);
 
                 nameTextBox.Text = "";
                 dateTextBox.Text = "";
@@ -48,8 +48,12 @@ namespace DZ
 
         private void peopleListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            InfoForm info = new(person);
-            info.ShowDialog();
+            if (peopleListBox.SelectedItem != null)
+            {
+                Person selectedPerson = (Person)peopleListBox.SelectedItem;
+                InfoForm info = new InfoForm(selectedPerson);
+                info.ShowDialog();
+            }
         }
     }
 }
