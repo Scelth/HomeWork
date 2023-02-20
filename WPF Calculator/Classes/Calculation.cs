@@ -1,4 +1,4 @@
-﻿using Calculator.Interfaces;
+using Calculator.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +35,11 @@ namespace Calculator.Classes
                 index = Val.Text.IndexOf("/");
             }
 
+            else if (Val.Text.Contains("%"))
+            {
+                index = Val.Text.IndexOf("%");
+            }
+
             else
             {
                 MessageBox.Show("Select an action", "Error", MessageBoxButton.OK);
@@ -62,10 +67,16 @@ namespace Calculator.Classes
                 Val.Text += op1 * op2;
             }
 
-            else
+            else if(op == "/")
             {
                 Val.Text = "";
                 Val.Text += op1 / op2;
+            }
+
+            else
+            {
+                Val.Text = "";
+                Val.Text += ((op1 * op2) / 100);
             }
         }
     }
