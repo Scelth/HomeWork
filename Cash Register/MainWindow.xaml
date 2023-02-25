@@ -1,0 +1,150 @@
+﻿<Window x:Class="Cash_Register.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cash_Register"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Cash Register" Height="500" Width="600">
+
+    <!-- #region Refill -->
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Refill" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <Grid Width="80" Height="78" VerticalAlignment="Top">
+            <StackPanel Height="45" VerticalAlignment="Bottom">
+                <ComboBox Name="gasComboBox" SelectedIndex="0" HorizontalContentAlignment="Center" IsSynchronizedWithCurrentItem="True" SelectionChanged="gasComboBox_SelectionChanged">
+                    <ComboBoxItem x:Name="Mark" Content="Mark"/>
+                    <ComboBoxItem x:Name="A_92" Content="A-92"/>
+                    <ComboBoxItem x:Name="A_95" Content="A-95"/>
+                    <ComboBoxItem x:Name="A_98" Content="A-98"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Gas" Height="55" Width="60" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Bottom"/>
+            <Label Content="Price ($)" Height="90" Width="70" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Bottom"/>
+            <TextBlock x:Name="priceTextBlock" Height="20" Width="80" Grid.Row="0" VerticalAlignment="Bottom" TextAlignment="Right"/>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Width="70" HorizontalAlignment="Right">
+                    <RadioButton x:Name="litersRadioButton" Content="Liters" IsChecked="{Binding PaymentType}" Grid.Row="1" Grid.Column="0" GroupName="PaymentType" Click="gasRadioButton_Click"/>
+                    <RadioButton x:Name="cashRadioButton" Content="Cash" IsChecked="{Binding PaymentType}" Grid.Row="1" Grid.Column="0" GroupName="PaymentType" Click="gasRadioButton_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="70" HorizontalAlignment="Left">
+                    <TextBox x:Name="litersTextBox" Text="" Height="17" HorizontalContentAlignment="Right" IsEnabled="{Binding ElementName=litersRadioButton, Path=IsChecked}"/>
+                    <TextBox x:Name="cashTextBox" Text="" Height="17" HorizontalContentAlignment="Right" IsEnabled="{Binding ElementName=cashRadioButton, Path=IsChecked}"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Payment:" FontSize="25" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+
+                <TextBlock x:Name="gasPaymentTextBlock" Text="" FontSize="25" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <!-- #endregion -->
+
+
+
+        <!-- #region Mini Cafe -->
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="0.8*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Mini Cafe" FontSize="18"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Label Content="Price" Width="50"/>
+                <Label Content="Quantity" Width="50"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <CheckBox x:Name="hod_dogCheckBox" Content="Hot-Dog" VerticalContentAlignment="Top" IsChecked="{Binding Check}" Click="cafeCheckBox_Click"/>
+                <CheckBox x:Name="hamburgerCheckBox" Content="Hamburger" VerticalContentAlignment="Top" IsChecked="{Binding Check}" Click="cafeCheckBox_Click"/>
+                <CheckBox x:Name="friesCheckBox" Content="French fries" VerticalContentAlignment="Top" IsChecked="{Binding Check}" Click="cafeCheckBox_Click"/>
+                <CheckBox x:Name="colaCheckBox" Content="Cola" VerticalContentAlignment="Top" IsChecked="{Binding Check}" Click="cafeCheckBox_Click"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    
+                    <TextBox Text="2.5" Width="50" HorizontalContentAlignment="Right" IsReadOnly="True" Background="LightGray"/>
+                    <TextBox x:Name="hod_dogTextBox" Text="" Width="50" HorizontalContentAlignment="Right" IsEnabled="{Binding ElementName=hod_dogCheckBox, Path=IsChecked}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBox Text="3" Width="50" HorizontalContentAlignment="Right" IsReadOnly="True" Background="LightGray"/>
+                    <TextBox x:Name="hamburgerTextBox" Text="" Width="50" HorizontalContentAlignment="Right" IsEnabled="{Binding ElementName=hamburgerCheckBox, Path=IsChecked}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBox Text="1.5" Width="50" HorizontalContentAlignment="Right" IsReadOnly="True" Background="LightGray"/>
+                    <TextBox x:Name="friesTextBox" Text="" Width="50" HorizontalContentAlignment="Right" IsEnabled="{Binding ElementName=friesCheckBox, Path=IsChecked}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBox Text="2" Width="50" HorizontalContentAlignment="Right" IsReadOnly="True" Background="LightGray"/>
+                    <TextBox x:Name="colaTextBox" Text="" Width="50" HorizontalContentAlignment="Right" IsEnabled="{Binding ElementName=colaCheckBox, Path=IsChecked}"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <Button x:Name="orderButton" Content="Order" Grid.Column="0" Grid.Row="1" Height="45" VerticalAlignment="Bottom" Click="orderButton_Click"/>
+            <Label Content="Payment:" Grid.Row="2" Grid.Column="0" FontSize="25" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+            <TextBlock x:Name="cafePaymentTextBlock" Text="" FontSize="25" Grid.Column="1" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Button Content="Summarize" Grid.Column="0" Grid.Row="1" Height="80" Width="250" Click="Sum_Click"/>
+        <TextBlock Name="Sum" Text="" Grid.Column="1" Grid.Row="1" FontSize="40" TextAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+    <!-- #endregion -->
+</Window>
