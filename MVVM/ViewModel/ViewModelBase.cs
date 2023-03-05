@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+// Данный кусок кода был найден в интернете
 namespace MVVM.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
