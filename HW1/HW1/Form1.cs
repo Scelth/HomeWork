@@ -1,8 +1,7 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Windows.Forms;
 
-namespace Lesson1
+namespace HW1
 {
     public partial class Form1 : Form
     {
@@ -58,7 +57,7 @@ namespace Lesson1
             using SqlConnection conn = new("Data Source=localhost;Database=Academy;Trusted_Connection=True;TrustServerCertificate=True;");
             conn.Open();
 
-            var query = youtTextBox.Text;
+            var query = yourTextBox.Text;
 
             var adapter = new SqlDataAdapter(query, conn);
             var data = new DataSet();

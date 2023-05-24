@@ -1,4 +1,4 @@
-namespace Lesson1
+namespace HW1
 {
     internal static class Program
     {
