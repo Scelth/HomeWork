@@ -24,5 +24,14 @@ namespace Wiki.Model
         public int Area { get; set; }
 
         public int GDP { get; set; }
+
+        public string Ruler { get; set; }
+
+        public string Anthem { get; set; }
+
+        public override string ToString()
+        {
+            return Name + Year + TypeOfBoard + Map + Population + Area + GDP;
+        }
     }
 }

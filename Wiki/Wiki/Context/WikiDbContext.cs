@@ -42,6 +42,8 @@ namespace Wiki.Context
             country.Property(x => x.Population).IsRequired();
             country.Property(x => x.Area).IsRequired();
             country.Property(x => x.GDP).IsRequired();
+            country.Property(x => x.Ruler).IsRequired();
+            country.Property(x => x.Anthem).IsRequired();
         }
     }
 }
