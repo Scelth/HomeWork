@@ -19,7 +19,7 @@ namespace Wiki.View
     /// <summary>
     /// Interaction logic for AddView.xaml
     /// </summary>
-    public partial class AddView : Page
+    public partial class AddView : UserControl
     {
         public AddView()
         {

@@ -18,7 +18,7 @@ namespace Wiki.View
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
-    public partial class ListView : Page
+    public partial class ListView : UserControl
     {
         public ListView()
         {

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Wiki.View.ListView"
+﻿<UserControl x:Class="Wiki.View.ListView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -115,4 +115,4 @@
                VerticalAlignment="Top" 
                Margin="10 10 25 10"/>
     </Grid>
-</Page>
+</UserControl>

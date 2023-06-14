@@ -10,7 +10,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InfoView">
 
-    <Grid Background="Pink">
+    <Grid Background="LightGray">
 
     </Grid>
 </Page>

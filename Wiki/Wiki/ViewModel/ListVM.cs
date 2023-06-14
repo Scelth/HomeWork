@@ -22,45 +22,6 @@ namespace Wiki.ViewModel
         private ViewModelBase selectedPage;
         private readonly IMessenger _messenger;
         private readonly INavigateService _navigateService;
-        //public Country country { get; set; } = new();
-
-        //private Country _country = new();
-        //public Country Country
-        //{
-        //    get => _country;
-
-        //    set
-        //    {
-        //        if (_country != value)
-        //        {
-        //            Set(ref _country, value);
-        //        }
-        //    }
-        //}
-
-        //public ViewModelBase CurrentViewModel
-        //{
-        //    get => selectedPage;
-        //    set
-        //    {
-        //        Set(ref selectedPage, value);
-        //    }
-        //}
-
-        //        private ViewModelBase _info;
-        //public ViewModelBase Info
-        //{
-        //    get => _info;
-        //    set
-        //    {
-        //        Set(ref _info, value);
-        //    }
-        //}
-
-        //public void ReceiveMessage(NavigationMessage message)
-        //{
-        //    CurrentViewModel = App.Container.GetInstance(message.VMType) as ViewModelBase;
-        //}
 
         private List<Country> _list;
         public List<Country> List
@@ -85,31 +46,9 @@ namespace Wiki.ViewModel
                 {
                     _selectedCountry = value;
                     RaisePropertyChanged(nameof(SelectedCountry));
-                    //ShowCountryDetails();
                 }
             }
         }
-
-        //private void ShowCountryDetails()
-        //{
-        //    if (SelectedCountry != null)
-        //    {
-        //        string CountryName = $"Сountry: {SelectedCountry.Name}";
-        //        string CountryYear = $"Year: {SelectedCountry.Year.ToString()}";
-        //        string CountryBoard = $"Type of board: {SelectedCountry.TypeOfBoard}";
-        //        string CountryPopulation = $"Population: {SelectedCountry.Population.ToString()} people";
-        //        string countryArea = $"Area: {SelectedCountry.Area.ToString()} km²";
-        //        string countryGDP = $"GDP: {SelectedCountry.GDP.ToString()}";
-
-        //        // Download the image from the link
-        //        // Загружаем изображение по ссылке
-        //        BitmapImage image = new BitmapImage(new Uri(SelectedCountry.Map));
-
-        //        // Setting the image to the Image element
-        //        // Устанавливаем изображение в элемент Image
-        //        var CountryMapImage = image;
-        //    }
-        //}
 
         public ListVM(IMessenger messenger, INavigateService navigateService)
         {
