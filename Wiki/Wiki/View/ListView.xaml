@@ -21,7 +21,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.ColumnSpan="2" Margin="10" Orientation="Horizontal">
-            <Button Content="By name" 
+            <Button Command="{Binding ByNameCommand}"
+                    Content="By name" 
                     Height="40" 
                     Width="150"
                     FontSize="20"
@@ -29,15 +30,8 @@
                     Background="DarkRed"
                     Foreground="WhiteSmoke"/>
 
-            <Button Content="By year" 
-                    Height="40" 
-                    Width="150"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    Background="DarkRed"
-                    Foreground="WhiteSmoke"/>
-            
-            <Button Content="By population" 
+            <Button Command ="{Binding ByYearCommand}" 
+                    Content="By year" 
                     Height="40" 
                     Width="150"
                     FontSize="20"
@@ -45,7 +39,8 @@
                     Background="DarkRed"
                     Foreground="WhiteSmoke"/>
 
-            <Button Content="By area" 
+            <Button Command ="{Binding ByPopulationCommand}" 
+                    Content="By population" 
                     Height="40" 
                     Width="150"
                     FontSize="20"
@@ -53,7 +48,17 @@
                     Background="DarkRed"
                     Foreground="WhiteSmoke"/>
 
-            <Button Content="By GDP" 
+            <Button Command ="{Binding ByAreaCommand}" 
+                    Content="By area" 
+                    Height="40" 
+                    Width="150"
+                    FontSize="20"
+                    Margin="0 0 10 0"
+                    Background="DarkRed"
+                    Foreground="WhiteSmoke"/>
+
+            <Button Command ="{Binding ByGDPCommand}" 
+                    Content="By GDP" 
                     Height="40" 
                     Width="150"
                     FontSize="20"
@@ -71,48 +76,48 @@
                  Background="LightGray"/>
 
         <ScrollViewer Grid.Column="1" Grid.Row="1">
-            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Grid.RowSpan="2" Margin="10">
-                <TextBlock Text="{Binding SelectedCountry.Name}"
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Grid.RowSpan="2" Margin="10">
+                    <TextBlock Text="{Binding SelectedCountry.Name}"
                        Margin="10" 
                        FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.Year}"
+                    <TextBlock Text="{Binding SelectedCountry.Year}"
                        Margin="10" 
                        FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.TypeOfBoard}"
+                    <TextBlock Text="{Binding SelectedCountry.TypeOfBoard}"
                        Margin="10" 
                        FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.Population}"
+                    <TextBlock Text="{Binding SelectedCountry.Population}"
                        Margin="10" 
                        FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.Area}"
+                    <TextBlock Text="{Binding SelectedCountry.Area}"
                        Margin="10" 
                        FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.GDP}"
+                    <TextBlock Text="{Binding SelectedCountry.GDP}"
                        Margin="10" 
                        FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.Ruler}"
+                    <TextBlock Text="{Binding SelectedCountry.Ruler}"
                            Margin="10"
                            FontSize="20"/>
 
-                <TextBlock Text="{Binding SelectedCountry.Anthem}"
+                    <TextBlock Text="{Binding SelectedCountry.Anthem}"
                            Margin="10"
                            FontSize="20"/>
+                </StackPanel>
+                
+                <Image Source="{Binding SelectedCountry.Map}"
+                       Height="250" 
+                       Width="300" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Top" 
+                       Margin="10 10 25 10"/>
             </StackPanel>
         </ScrollViewer>
-
-        <Image Source="{Binding SelectedCountry.Map}" 
-               Grid.Column="1" 
-               Grid.Row="1" 
-               Height="250" 
-               Width="300" 
-               HorizontalAlignment="Right" 
-               VerticalAlignment="Top" 
-               Margin="10 10 25 10"/>
     </Grid>
 </UserControl>

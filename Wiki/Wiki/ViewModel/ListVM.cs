@@ -64,12 +64,44 @@ namespace Wiki.ViewModel
             List = countries;
         }
 
-        //public RelayCommand InfoCommand
-        //{
-        //    get => new(() =>
-        //    {
-        //        _navigateService.NavigateTo<InfoVM>();
-        //    });
-        //}
+        public RelayCommand ByNameCommand
+        {
+            get => new(() =>
+            {
+                List = List.OrderBy(country => country.Name).ToList();
+            });
+        }
+
+        public RelayCommand ByYearCommand
+        {
+            get => new(() =>
+            {
+                List = List.OrderBy(country => country.Year).ToList();
+            });
+        }
+
+        public RelayCommand ByPopulationCommand
+        {
+            get => new(() =>
+            {
+                List = List.OrderBy(country => country.Population).ToList();
+            });
+        }
+
+        public RelayCommand ByAreaCommand
+        {
+            get => new(() =>
+            {
+                List = List.OrderBy(country => country.Area).ToList();
+            });
+        }
+
+        public RelayCommand ByGDPCommand
+        {
+            get => new(() =>
+            {
+                List = List.OrderBy(country => country.GDP).ToList();
+            });
+        }
     }
 }

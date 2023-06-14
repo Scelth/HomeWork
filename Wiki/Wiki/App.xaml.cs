@@ -35,7 +35,6 @@ namespace Wiki
             Container.RegisterSingleton<MainVM>();
             Container.RegisterSingleton<AddVM>();
             Container.RegisterSingleton<ListVM>();
-            Container.RegisterSingleton<InfoVM>();
         }
 
         private void MainStartup()

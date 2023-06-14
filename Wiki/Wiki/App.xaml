@@ -20,10 +20,6 @@
                 <View:ListView></View:ListView>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type VM:InfoVM}">
-                <View:InfoView></View:InfoView>
-            </DataTemplate>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>
