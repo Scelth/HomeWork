@@ -51,7 +51,8 @@
                          Height="75" 
                          Margin="2"
                          TextWrapping="Wrap"
-                         FontSize="15"/>
+                         FontSize="15"
+                         Text="{Binding CurrentMessage}"/>
             </StackPanel>
         </Border>
 

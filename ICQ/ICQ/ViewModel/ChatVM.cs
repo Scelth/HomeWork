@@ -1,17 +1,12 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ICQ.Services.Inerfaces;
-using ICQ.Messages;
 using System.Net.Sockets;
 using System.Net;
-using System.Text;
-using System.Security.RightsManagement;
 using ICQ.Model;
+using GalaSoft.MvvmLight.Command;
+using System.Windows;
 
 namespace ICQ.ViewModel
 {
@@ -21,54 +16,81 @@ namespace ICQ.ViewModel
         private readonly INavigateService _navigateService;
         UserModel User;
 
-        string Messages { get; set; }
+        private IPEndPoint serverEndPoint;
+        UdpClient udpClient;
 
-        int serverPort = 11000; // Replace with the server port
-        string serverAddress = "127.0.0.1"; // Replace with the multicast IP address of the server
+        private string _messages;
+        public string Messages
+        {
+            get => _messages;
+            set
+            {
+                Set(ref _messages, value);
+            }
+        }
+
+        private string _currentMessage;
+        public string CurrentMessage
+        {
+            get => _currentMessage;
+            set
+            {
+                Set(ref _currentMessage, value);
+            }
+        }
+
+        int serverPort = 11000;
+        string serverAddress = "239.0.0.1";
 
 
-        public ChatVM(IMessenger messenger, INavigateService navigateService)
+        public ChatVM(IMessenger messenger, INavigateService navigateService, UserModel user)
         {
             _messenger = messenger;
             _navigateService = navigateService;
+            User = user;
 
-            UdpClient udpClient = new UdpClient();
+            udpClient = new UdpClient();
             IPAddress serverIpAddress = IPAddress.Parse(serverAddress);
             udpClient.JoinMulticastGroup(serverIpAddress);
 
-            // Bind the client to a local address and a random available port
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 0);
             udpClient.Client.Bind(localEndPoint);
 
-            // Get the actual port used by the client
             int localPort = ((IPEndPoint)udpClient.Client.LocalEndPoint).Port;
 
-            // Address and port of the server
-            IPEndPoint serverEndPoint = new IPEndPoint(serverIpAddress, serverPort);
+            serverEndPoint = new(serverIpAddress, serverPort);
 
             var receiveThread = new System.Threading.Thread(() =>
             {
                 while (true)
                 {
-                    byte[] receivedData = udpClient.Receive(ref serverEndPoint); // Use 'ref' here as well
+                    byte[] receivedData = udpClient.Receive(ref serverEndPoint);
                     string message = Encoding.UTF8.GetString(receivedData);
-                    Messages = User.Username + ": sdas" + message;
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Messages += message + "\n";
+                    });
                 }
             });
 
             receiveThread.Start();
-
-            while (true)
-            {
-                string messageToSend = Console.ReadLine();
-
-                // Convert the message to a byte array
-                byte[] data = Encoding.UTF8.GetBytes(messageToSend);
-
-                // Send the message to the multicast group
-                udpClient.Send(data, data.Length, serverEndPoint);
-            }
         }
 
+        public RelayCommand SendCommand
+        {
+            get => new(() =>
+            {
+                if (CurrentMessage != null)
+                {
+                    Messages += $"[{User}]: {CurrentMessage}\n";
+
+                    byte[] data = Encoding.UTF8.GetBytes(Messages);
+                    udpClient.Send(data, data.Length, serverEndPoint);
+
+                    CurrentMessage = "";
+                }
+            });
+        }
     }
 }

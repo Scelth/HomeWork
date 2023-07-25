@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using ICQ.Model;
 using ICQ.Services.Classes;
 using ICQ.Services.Inerfaces;
 using ICQ.View;
@@ -35,6 +36,7 @@ namespace ICQ
 
             Container.RegisterSingleton<MainVM>();
             Container.RegisterSingleton<ChatVM>();
+            Container.RegisterSingleton<UserModel>();
         }
 
         private void MainStartup()

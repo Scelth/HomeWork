@@ -28,7 +28,7 @@ var receiveThread = new System.Threading.Thread(() =>
     {
         byte[] receivedData = udpClient.Receive(ref serverEndPoint); // Use 'ref' here as well
         string message = Encoding.UTF8.GetString(receivedData);
-        Console.WriteLine("Received message from server or another client: " + message);
+        Console.WriteLine(message);
     }
 });
 

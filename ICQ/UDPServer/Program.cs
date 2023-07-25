@@ -5,13 +5,13 @@ using System.Text;
 List<IPEndPoint> clients = new List<IPEndPoint>();
 
 int port = 11000;
-string groupAddress = "127.0.0.1";
+string groupAddress = "239.0.0.1";
 
 UdpClient udpServer = new UdpClient();
 udpServer.JoinMulticastGroup(IPAddress.Parse(groupAddress));
 udpServer.Client.Bind(new IPEndPoint(IPAddress.Any, port));
 
-Console.WriteLine("Сервер запущен. Ожидание сообщений...");
+Console.WriteLine("The server is running. Waiting for messages...");
 
 while (true)
 {
@@ -20,7 +20,7 @@ while (true)
     data = udpServer.Receive(ref senderEndPoint);
 
     string message = Encoding.UTF8.GetString(data);
-    Console.WriteLine("Received message from client: " + message);
+    Console.WriteLine(message);
 
     if (!clients.Contains(senderEndPoint))
     {

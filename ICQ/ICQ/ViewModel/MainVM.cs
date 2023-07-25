@@ -57,7 +57,7 @@ namespace ICQ.ViewModel
         {
             get => new(() =>
             {
-                if (User.Username != null)
+                if (User != null)
                 {
                     _navigateService.NavigateTo<ChatVM>();
                 }
