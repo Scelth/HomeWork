@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPServer", "UDPServer\UDPServer.csproj", "{B8CE9843-62C6-46AC-8B1E-AC4EB2C1663F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPClient", "UDPClient\UDPClient.csproj", "{615B3171-E345-478A-94E9-5B6547A0D00C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPDClient1", "UPDClient1\UPDClient1.csproj", "{780DEF2E-C824-4938-A50E-0B727718BBD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8CE9843-62C6-46AC-8B1E-AC4EB2C1663F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8CE9843-62C6-46AC-8B1E-AC4EB2C1663F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8CE9843-62C6-46AC-8B1E-AC4EB2C1663F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8CE9843-62C6-46AC-8B1E-AC4EB2C1663F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{615B3171-E345-478A-94E9-5B6547A0D00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{615B3171-E345-478A-94E9-5B6547A0D00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{615B3171-E345-478A-94E9-5B6547A0D00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{615B3171-E345-478A-94E9-5B6547A0D00C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{780DEF2E-C824-4938-A50E-0B727718BBD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780DEF2E-C824-4938-A50E-0B727718BBD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780DEF2E-C824-4938-A50E-0B727718BBD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780DEF2E-C824-4938-A50E-0B727718BBD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2FCEB9B-C692-416D-8E52-788FAF310E8E}
+	EndGlobalSection
+EndGlobal
