@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ICQ.Messages
+namespace ICQ
 {
-    class NavigationMessage
+    public class MessageInfo
     {
-        public Type VMType { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

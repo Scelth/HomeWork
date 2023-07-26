@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ICQ.Messages
+namespace ICQ
 {
-    class DataMessage
+    public class ChatUser
     {
-        public object Data { get; set; }
+        public string Username { get; set;}
     }
 }
