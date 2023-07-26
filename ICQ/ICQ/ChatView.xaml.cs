@@ -29,10 +29,11 @@ namespace ICQ
 
         int serverPort = 11000;
         string serverAddress = "239.0.0.1";
+
         public ChatView(ChatUser user)
         {
             InitializeComponent();
-            Connetion();
+            Connection();
             chatUser = user;
             userTextBlock.Text = chatUser.Username;
         }
@@ -43,12 +44,10 @@ namespace ICQ
             {
                 lastChatTime.DateTime = DateTime.Now;
 
-                // Format the message with Username and time
                 string message = $"[{lastChatTime.DateTime:G}] [{chatUser.Username}]: {messageTextBox.Text}";
 
                 messageTextBox.AppendText(message);
 
-                // Send the message through UDP
                 byte[] data = Encoding.UTF8.GetBytes(message);
                 udpClient.Send(data, data.Length, serverEndPoint);
 
@@ -56,7 +55,7 @@ namespace ICQ
             }
         }
 
-        private void Connetion()
+        private void Connection()
         {
             udpClient = new();
             IPAddress serverIpAddress = IPAddress.Parse(serverAddress);
