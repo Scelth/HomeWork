@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Notification.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Notification.wav" />
+  </ItemGroup>
+
 </Project>

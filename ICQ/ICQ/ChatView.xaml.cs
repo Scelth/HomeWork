@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Media;
+using System.IO;
 
 namespace ICQ
 {
@@ -26,6 +28,7 @@ namespace ICQ
         private UdpClient udpClient;
         private ChatUser chatUser;
         private MessageInfo lastChatTime = new();
+        private SoundPlayer notificationSound;
 
         int serverPort = 11000;
         string serverAddress = "239.0.0.1";
@@ -36,6 +39,9 @@ namespace ICQ
             Connection();
             chatUser = user;
             userTextBlock.Text = chatUser.Username;
+
+            Stream stream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Notification.wav")).Stream;
+            notificationSound = new(stream);
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
@@ -78,11 +84,18 @@ namespace ICQ
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         chatTextBox.Text += message + "\n";
+
+                        PlayNotificationSound();
                     });
                 }
             });
 
             receiveThread.Start();
+        }
+
+        private void PlayNotificationSound()
+        {
+            notificationSound.Play();
         }
     }
 }
