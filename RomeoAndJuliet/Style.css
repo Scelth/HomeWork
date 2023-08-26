@@ -1,0 +1,31 @@
+.Container {
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Act h1 {
+    text-align: center;
+    color: blue;
+}
+
+.Act h3 {
+    color: rgb(0, 162, 255);
+}
+
+.Quote {
+    font-style: italic;
+    line-height: 1.6;
+    font-size: large;
+    margin-left: 20px;
+}
+
+.Dialogue h3 {
+    color: rgb(0, 162, 255);
+}
+
+.Dialogue p {
+    font-style: italic;
+    line-height: 1.6;
+    font-size: large;
+    margin-left: 20px;
+}
