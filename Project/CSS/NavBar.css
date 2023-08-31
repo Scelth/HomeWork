@@ -1,6 +1,6 @@
 .Nav-Main {
     padding: 0 5% 0 5%;
-    background-color: rgb(7, 13, 25);
+    background-color: rgb(26, 26, 26);
     display: flex;
     height: 70px;
     justify-content: flex-start;
@@ -74,7 +74,7 @@
 
 
 .Nav-Logo img {
-    height: 50%;
+    height: 75%;
     width: auto;
     object-fit: contain;
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/CSS/NavBar.css">
+    <link rel="stylesheet" href="/CSS/Carousel.css">
+    <link rel="stylesheet" href="/CSS/Style.css">
+    <link rel="stylesheet" href="/CSS/Animation.css">
+    <script defer src="/JS/Carousel.js"></script>
+    <script defer src="https://kit.fontawesome.com/a3d2e49c70.js" crossorigin="anonymous"></script>
+    <title>Katana</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="Nav-Main">
+                <div class="Nav-Logo">
+                    <a href="#">
+                        <img src="/Assets/smurai-logo.png" alt="shop logo">
+                    </a>
+                </div>
+
+                <ul class="Nav-Body">
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/sword/authentic-sword/katana/"><span>KATANA</span></a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/sword/authentic-sword/wakizashi/">WAKIZASHI</a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/sword/authentic-sword/tanto/">TANTO</a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/sword/authentic-sword/tachi/">TACHI</a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/other/">ACCESSORIES</a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/about-us/">ABOUT US</a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/contact/">CONTACT</a></li>
+                </ul>
+
+                <div class="Nav-End">
+                    <button type="button" class="Btn Search-Btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    
+                    <button type="button" class="Btn Cart-Btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="promo">
+            <p>Free shipping on all orders</p>
+        </div>
+
+        <div class="carousel">
+            <ul class="carousel-items">
+                <li class="carousel-item">
+                    <img id="carousel-img">
+                    <div class="carousel-left carousel-nav">
+                        <button id="left-btn" class="btn carousel-nav-btn">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                    </div>
+
+                    <div class="carousel-right carousel-nav">
+                        <button id="right-btn" class="btn carousel-nav-btn">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
