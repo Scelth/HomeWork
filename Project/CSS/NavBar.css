@@ -32,7 +32,7 @@
 .Nav-Body a {
     display: flex;
     align-items: center;
-    color: rgb(255, 255, 255);
+    color: white;
     text-decoration: none;
     transition: ease-in-out 0.1s;
     white-space: nowrap;

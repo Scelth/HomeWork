@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/CSS/NavBar.css">
+    <link rel="stylesheet" href="/CSS/Carousel.css">
+    <link rel="stylesheet" href="/CSS/Style.css">
+    <link rel="stylesheet" href="/CSS/Animation.css">
+    <link rel="stylesheet" href="/CSS/Slider.css">
+
+    <script defer src="/JS/Carousel.js"></script>
+    <script defer src="/JS/Slider.js"></script>
+
+    <script defer src="https://kit.fontawesome.com/a3d2e49c70.js"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.1/assets/owl.carousel.css'>
+
+    <title>Samurai</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="Nav-Main">
+                <div class="Nav-Logo">
+                    <a href="#">
+                        <img src="/Assets/samurai-logo.png" alt="shop logo">
+                    </a>
+                </div>
+
+                <ul class="Nav-Body">
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/sword/authentic-sword/katana/"><span>KATANA</span></a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/product-category/sword/authentic-sword/wakizashi/">WAKIZASHI</a></li>
+                    <li><a href="https://cotoacademy.com/samurai/">LIFE OF A SAMURAI</a></li>
+                    <il><a href="#">SAMURAI AND RONIN</a></il>
+                    <li><a href="https://www.samuraimuseum.jp/shop/about-us/">ABOUT US</a></li>
+                    <li><a href="https://www.samuraimuseum.jp/shop/contact/">CONTACT</a></li>
+                </ul>
+
+                <div class="Nav-End">
+                    <button type="button" class="Btn Search-Btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    
+                    <button type="button" class="Btn Cart-Btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+      <div class="carousel">
+        <ul class="carousel-items">
+            <li class="carousel-item">
+                <img id="carousel-img">
+                <div class="carousel-left">
+                    <button id="left-btn" class="btn carousel-nav-btn">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                </div>
+
+                <div class="carousel-right carousel-nav">
+                    <button id="right-btn" class="btn carousel-nav-btn">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+
+    <div class="slideshow-container">
+
+        <div class="slide-text">
+            <h2>GREATEST SAMURAI AND RONIN</h2>
+        </div>
+
+        <div class="mySlides fade">
+            <img class="slide-image" src="/Assets/Miyamoto_Musashi.png">
+            <p>Miyamoto Musashi</p>
+        </div>
+    
+        <div class="mySlides fade">
+            <img class="slide-image" src="/Assets/Tokugawa_Ieyasu.png">
+            <p>Tokugawa Ieyasu</p>
+        </div>
+    
+        <div class="mySlides fade">
+            <img class="slide-image" src="/Assets/Minamoto_No_Yoshitsune.jpg">
+            <p>Minamoto No Yoshitsune</p>
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094</a>
+        <a class="next" onclick="plusSlides(1)">&#10095</a>
+    </div>
+
+    <div class="dot-main">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    </main>
+</body>
+</html>

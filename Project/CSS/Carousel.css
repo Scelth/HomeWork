@@ -9,11 +9,13 @@
 
 .carousel-left {
     position: absolute;
+    margin-left: 1%;
     left: 10px;
 }
 
 .carousel-right {
     position: absolute;
+    margin-right: 1%;
     right: 10px;
 }
 
