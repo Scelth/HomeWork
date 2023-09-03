@@ -1,0 +1,16 @@
+#audio-container {
+    display: none;
+  }
+  
+
+  .msc-button{
+    background-color: transparent;
+    border-color: transparent;
+    position: absolute;
+    right: 5px;
+    margin-right: 2%;
+  }
+
+  .audio{
+   margin-left: 50%;
+  }
