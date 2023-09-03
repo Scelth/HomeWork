@@ -1,5 +1,5 @@
 var photoId = 1;
-var photoPath = `/Assets/${photoId}.png`;
+var photoPath = `/Assets/Images/Header/${photoId}.png`;
 
 var image = document.getElementById(`carousel-img`);
 var leftBtn = document.getElementById(`left-btn`);
@@ -27,7 +27,7 @@ function rightChangePhoto() {
         photoId = 0;
     }    
     photoId++; 
-    photoPath = `/Assets/${photoId}.png`;
+    photoPath = `/Assets/Images/Header/${photoId}.png`;
     image.src = photoPath;
   
 }
@@ -42,7 +42,7 @@ function leftChangePhoto() {
         photoId = 4;
     }       
     photoId--; 
-    photoPath = `../Assets/${photoId}.png`;
+    photoPath = `/Assets/Images/Header/${photoId}.png`;
     image.src = photoPath;
 }
 
