@@ -9,8 +9,6 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
-    min-height: 90vh;
-    
   }
 
   .container {
@@ -127,24 +125,3 @@
   .slick-prev {
     left: -40px;
   }
-
-  @media (max-width: 1023px) {
-    .slides img {
-        float: none;
-        margin: 0 auto;
-    }
-    
-    .slides p {
-        display: none;
-    }
-    
-    .bottom-slider .slides {
-        text-align: center;
-    }
-    
-    .bottom-slider .slick-slide {
-        width: 80%;
-        margin: 0 auto;
-    }
-    
-}
