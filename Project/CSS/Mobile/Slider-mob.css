@@ -1,0 +1,19 @@
+@media (max-width: 1023px) {
+    .slides img {
+        float: none;
+        margin: 0 auto;
+    }
+    
+    .slides p {
+        display: none;
+    }
+    
+    .bottom-slider .slides {
+        text-align: center;
+    }
+    
+    .bottom-slider .slick-slide {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
