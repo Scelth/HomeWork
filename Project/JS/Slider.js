@@ -15,9 +15,9 @@
       ".top-slider .slides, .bottom-slider .slides, .three-slide-slider .slides",
     responsive: [
       {
-        breakpoint: 425,
+        breakpoint: 1450,
         settings: {
-          slidesToShow: 2
+          slidesToShow: 1
         }
       }
     ]

@@ -18,7 +18,6 @@ rightBtn.onclick = () => {
 
 setInterval(() => {rightChangePhoto}, 1000);
 
-
 function rightChangePhoto() {
     removeAnimations();
     void image.offsetWidth;
@@ -31,7 +30,6 @@ function rightChangePhoto() {
     image.src = photoPath;
   
 }
-
 
 function leftChangePhoto() {
     removeAnimations();
@@ -58,3 +56,5 @@ function removeAnimations() {
         image.classList.remove(`fade-in-left`);
     }
 }
+
+setInterval(rightChangePhoto, 5000);

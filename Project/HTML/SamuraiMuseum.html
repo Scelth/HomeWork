@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/CSS/NavBar.css">
-    <link rel="stylesheet" href="/CSS/Carousel.css">
-    <link rel="stylesheet" href="/CSS/Style.css">
-    <link rel="stylesheet" href="/CSS/Animation.css">
-    <link rel="stylesheet" href="/CSS/Slider.css">
-    <link rel="stylesheet" href="/CSS/Music.css">
+    <link rel="stylesheet" href="/CSS//Main/Style.css">
+    <link rel="stylesheet" href="/CSS//Main/NavBar.css">
+    <link rel="stylesheet" href="/CSS//Main/Carousel.css">
+    <link rel="stylesheet" href="/CSS//Main/Animation.css">
+    <link rel="stylesheet" href="/CSS//Main/Slider.css">
+    <link rel="stylesheet" href="/CSS//Main/Music.css">
 
     <script defer src="/JS/Carousel.js"></script>
     <script defer src="/JS/Slider.js"></script>
     <script defer src="/JS/Music.js"></script>
+    <script defer src="/JS/Script.js"></script>
 
     <script defer src="https://kit.fontawesome.com/a3d2e49c70.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,25 +41,16 @@
                 </ul>
 
                 <div class="Nav-End">
-                    <button type="button" class="Btn Search-Btn">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    
-                    <button type="button" class="Btn Cart-Btn">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                    <div id="audio-container" class="audio">
+                      <audio id="music" controls autoplay>
+                        <source src="/Assets/Audio/Main_music.mp3" type="audio/mpeg">
+                      </audio>
+                    </div>
+  
+                    <button id="music-button" class="msc-button">
+                      <i class="fa-solid fa-music"></i>
                     </button>
                 </div>
-
-                <div id="audio-container" class="audio">
-                    <audio id="music" controls autoplay>
-                      <source src="/Assets/Audio/Main_music.mp3" type="audio/mpeg">
-                    </audio>
-                  </div>
-
-                  <button id="music-button" class="msc-button">
-                    <i class="fa-solid fa-music"></i>
-                  </button>
-
             </div>
         </nav>
     </header>
