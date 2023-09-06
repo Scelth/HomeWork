@@ -1,0 +1,12 @@
+#audio-container {
+  display: none;
+}
+
+.msc-button {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.audio {
+  margin-left: 50%;
+}/*# sourceMappingURL=Music.css.map */

@@ -1,0 +1,139 @@
+$color_1: white;
+$color_2: maroon;
+$color_3: black;
+$color_4: #c0eee4;
+$color_5: #f08a5d;
+$font-family_1: Karasha;
+$font-family_2: Shenttpuro Font;
+$background-color_1: #3b3939;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.slider-section {
+	background-color: $background-color_1;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	.slick-slide {
+		padding: 24px 0px;
+		border-radius: 10px;
+		text-align: center;
+		font-size: 2rem;
+		font-weight: 600;
+		font-family: $font-family_2;
+		color: $color_2;
+	}
+}
+.container {
+	margin: auto;
+	padding: 12px;
+	width: 100%;
+	max-width: 90%;
+	text-align: center;
+}
+h3 {
+	font-size: 2.75rem;
+	font-family: $font-family_1;
+	text-align: center;
+	margin-top: 2%;
+	color: $color_1;
+}
+.title {
+	font-size: 2rem;
+}
+p {
+	font-size: 1.5rem;
+	color: $color_2;
+}
+.slides {
+	margin: 32px auto;
+	align-items: center;
+	img {
+		float: left;
+		border-radius: 10px;
+		margin-right: 2%;
+		margin-left: 1%;
+	}
+}
+.info {
+	text-align: left;
+	margin: 1%;
+	color: $color_3;
+}
+.slick-slide {
+	&:not(.slick-current) {
+		opacity: 0.2;
+	}
+	background-image: url(/Assets/Images/Background/slider-background.jpg);
+	margin: 0 12px;
+}
+.bottom-slider-container {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+}
+.bottom-slider {
+	.slick-slide {
+		margin-block: 0.5rem;
+		font-size: 1.75rem;
+		font-weight: 500;
+		width: 300px;
+		background-image: url(/Assets/Images/Background/info-background.jpg);
+	}
+	width: 100%;
+	height: auto;
+}
+.slick-dots {
+	li {
+		button {
+			&:before {
+				color: $color_4;
+				opacity: 0.5;
+				transition: all 0.3s ease;
+			}
+			&:hover {
+				&::before {
+					color: $color_5;
+					opacity: 1;
+				}
+			}
+			&:focus {
+				&::before {
+					color: $color_5;
+					opacity: 1;
+				}
+			}
+		}
+	}
+	li.slick-active {
+		button {
+			&:before {
+				color: $color_5;
+				opacity: 1;
+			}
+		}
+	}
+}
+.slick-next {
+	width: fit-content;
+	height: auto;
+	right: -40px;
+	&:before {
+		font-size: 2.5rem;
+		opacity: 0.5;
+		color: $color_5;
+	}
+}
+.slick-prev {
+	width: fit-content;
+	height: auto;
+	left: -40px;
+	&:before {
+		font-size: 2.5rem;
+		opacity: 0.5;
+		color: $color_5;
+	}
+}

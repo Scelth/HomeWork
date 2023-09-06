@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Shenttpuro Font";
+  src: url(/Assets/Font/Shenttpuro-Font.ttf);
+}
+@font-face {
+  font-family: "Karasha";
+  src: url(/Assets/Font/Karasha.ttf);
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}/*# sourceMappingURL=Style.css.map */

@@ -1,0 +1,13 @@
+$background-color_1: transparent;
+$border-color_1: transparent;
+
+#audio-container {
+	display: none;
+}
+.msc-button {
+	background-color: $background-color_1;
+	border-color: $border-color_1;
+}
+.audio {
+	margin-left: 50%;
+}
