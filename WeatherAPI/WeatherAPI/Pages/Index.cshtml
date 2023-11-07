@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Weather page";
+}
+
+<div id="weather-search" class="text-center">
+    <form method="post">
+        <input name="cityName" placeholder="Enter your city" type="search" />
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+@if (Model.Weather.Temperature != "")
+{
+    <partial name="Shared/Partial/_weatherRes" model="@Model.Weather" />
+}

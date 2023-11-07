@@ -1,0 +1,8 @@
+﻿@model WeatherAPI.Models.Weather
+
+<div class="weatherRes">
+    <p>@Model.Temperature</p>
+    <p>@Model.Description</p>
+    <img src="/assets/@Model.ImgPath" alt="@Model.ImgPath">
+    <p>@Model.Wind</p>
+</div>
