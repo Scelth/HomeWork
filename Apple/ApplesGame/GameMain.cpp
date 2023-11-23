@@ -36,7 +36,6 @@ void ResetGame(float& playerX, float& playerY, float& playerSpeed, int& numEaten
 	float appleX[], float appleY[], sf::CircleShape applesShape[],
 	float obstacleX[], float obstacleY[], sf::RectangleShape obstaclesShape[])
 {
-	//sf::sleep(sf::seconds(2)); // Я пытался сделать так
 	playerX = SCREEN_WIDTH / 2.f;
 	playerY = SCREEN_HEIGTH / 2.f;
 	playerSpeed = INITIAL_SPEED;
@@ -199,7 +198,9 @@ int main()
 		{
 			window.draw(gameOverText);
 			window.display();
-			sf::sleep(sf::seconds(2));
+			sf::sleep(sf::seconds(2)); // Есть одна проблема с паузой между сессиями. 
+									   // После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
+
 			// Вызываем функцию для перезапуска игры
 			ResetGame(playerX, playerY, playerSpeed, numEatenApples, appleX, appleY, applesShape, obstacleX, obstacleY, obstaclesShape);
 		}
@@ -212,12 +213,14 @@ int main()
 				float dx = fabs(playerX - obstacleX[i]);
 				float dy = fabs(playerY - obstacleY[i]);
 
-				if (dx <= (OBSTACLE_SIZE + PLAYER_SIZE) / 2.f &&
-					dy <= (OBSTACLE_SIZE + PLAYER_SIZE) / 2.f)
+				if (dx <= (OBSTACLE_SIZE + PLAYER_SIZE) / 2.f && dy <= (OBSTACLE_SIZE + PLAYER_SIZE) / 2.f)
 				{
 					window.draw(gameOverText);
 					window.display();
-					sf::sleep(sf::seconds(2));
+					sf::sleep(sf::seconds(2)); // Есть одна проблема с паузой между сессиями. 
+											   // После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
+
+					// Вызываем функцию для перезапуска игры
 					ResetGame(playerX, playerY, playerSpeed, numEatenApples, appleX, appleY, applesShape, obstacleX, obstacleY, obstaclesShape);
 				}
 			}
