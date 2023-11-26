@@ -1,16 +1,18 @@
-﻿#include <SFML/Graphics.hpp>
+﻿// Я изменил игру, добавил звуки, музыку, текстуры. По сути, это та же самая игра яблоки, но в стилистике первого Doom.
+
+#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
 const std::string RESOURCES_PATH = "Resources/";
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGTH = 1080;
 const float INITIAL_SPEED = 100.f;
-const float PLAYER_SIZE = 20.f;
+const float PLAYER_SIZE = 40.f;
 const float ACCELIRATION = 20.f;
-const int NUM_APPLES = 20;
-const int NUM_OBSTACLES = 5;
-const float APPLE_SIZE = 20.f;
-const float OBSTACLE_SIZE = 20.f;
+const int NUM_ENEMIES = 20;
+const float ENEMY_SIZE = 40.f;
+const int NUM_OBSTACLES = 10;
+const float OBSTACLE_SIZE = 40.f;
 sf::Font font;
 
 void HandleWindowEvents(sf::RenderWindow& window)
@@ -32,27 +34,27 @@ void HandleWindowEvents(sf::RenderWindow& window)
 }
 
 // Функция для перезапуска игры
-void ResetGame(float& playerX, float& playerY, float& playerSpeed, int& numEatenApples, 
-	float appleX[], float appleY[], sf::CircleShape applesShape[],
-	float obstacleX[], float obstacleY[], sf::RectangleShape obstaclesShape[])
+void ResetGame(float& playerX, float& playerY, float& playerSpeed, int& numEatenApples,
+	float enemyX[], float enemyY[], sf::Sprite enemySprite[],
+	float obstacleX[], float obstacleY[], sf::Sprite obstacleSprite[])
 {
 	playerX = SCREEN_WIDTH / 2.f;
 	playerY = SCREEN_HEIGTH / 2.f;
 	playerSpeed = INITIAL_SPEED;
 	numEatenApples = 0;
 
-	for (int i = 0; i < NUM_APPLES; i++)
+	for (int i = 0; i < NUM_ENEMIES; i++)
 	{
-		appleX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
-		appleY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
-		applesShape[i].setPosition(appleX[i], appleY[i]);
+		enemyX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
+		enemyY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
+		enemySprite[i].setPosition(enemyX[i], enemyY[i]);
 	}
 
 	for (int i = 0; i < NUM_OBSTACLES; i++)
 	{
 		obstacleX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
 		obstacleY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
-		obstaclesShape[i].setPosition(obstacleX[i], obstacleY[i]);
+		obstacleSprite[i].setPosition(obstacleX[i], obstacleY[i]);
 	}
 }
 
@@ -61,25 +63,36 @@ int main()
 	int seed = (int)time(nullptr);
 	srand(seed);
 
-	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGTH), "Apple!");
+	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGTH), "Doom!");
 
 	float playerX = SCREEN_WIDTH / 2.f;
 	float playerY = SCREEN_HEIGTH / 2.f;
 	float playerSpeed = INITIAL_SPEED;
 	int playerDirection = 0;
 
-	sf::RectangleShape playerShape;
-	playerShape.setSize(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
-	playerShape.setFillColor(sf::Color::Yellow);
-	playerShape.setOrigin(PLAYER_SIZE / 2.f, PLAYER_SIZE / 2.f);
-	playerShape.setPosition(playerX, playerY);
+	sf::Texture backgroundTexture;
+	sf::Sprite backgroundSprite;
+	backgroundTexture.loadFromFile(RESOURCES_PATH + "Assets/Hell.png");
+	backgroundSprite.setTexture(backgroundTexture);
 
-	sf::CircleShape applesShape[NUM_APPLES];
-	float appleX[NUM_APPLES];
-	float appleY[NUM_APPLES];
-	bool isAppleEaten[NUM_APPLES];
+	sf::Texture playerTexture;
+	sf::Sprite playerSprite;
+	playerTexture.loadFromFile(RESOURCES_PATH + "Assets/DoomGuy.png");
+	playerSprite.setTexture(playerTexture);
+	playerSprite.setScale(PLAYER_SIZE / playerTexture.getSize().x, PLAYER_SIZE / playerTexture.getSize().y);
+	playerSprite.setOrigin(PLAYER_SIZE / 2.f, PLAYER_SIZE / 2.f);
+	playerSprite.setPosition(playerX, playerY);
 
-	sf::RectangleShape obstaclesShape[NUM_OBSTACLES];
+	sf::Texture enemyTexture;
+	enemyTexture.loadFromFile(RESOURCES_PATH + "Assets/Enemy.png");
+	sf::Sprite enemySprite[NUM_ENEMIES];
+	float enemyX[NUM_ENEMIES];
+	float enemyY[NUM_ENEMIES];
+	bool isEnemyKilled[NUM_ENEMIES];
+
+	sf::Texture obstacleTexture;
+	obstacleTexture.loadFromFile(RESOURCES_PATH + "Assets/Fire.png");
+	sf::Sprite obstacleSprite[NUM_OBSTACLES];
 	float obstacleX[NUM_OBSTACLES];
 	float obstacleY[NUM_OBSTACLES];
 	bool isHitObstacle[NUM_OBSTACLES];
@@ -102,22 +115,31 @@ int main()
 
 	sf::Text gameOverText;
 	gameOverText.setFont(font);
-	gameOverText.setCharacterSize(24);
+	gameOverText.setCharacterSize(50);
 	gameOverText.setFillColor(sf::Color::White);
 	gameOverText.setString("GAME OVER");
-	gameOverText.setPosition(SCREEN_WIDTH / 2.f, SCREEN_HEIGTH / 2.f);
+	gameOverText.setPosition(SCREEN_WIDTH / 2.5f, SCREEN_HEIGTH / 2.5f);
+
+	sf::Music backgroundMusic;
+	backgroundMusic.openFromFile(RESOURCES_PATH + "Audio/Background.ogg");
+	backgroundMusic.setLoop(true); // Зацикливание аудио
+
+	sf::SoundBuffer shotSoundBuffer;
+	shotSoundBuffer.loadFromFile(RESOURCES_PATH + "Audio/Shot.ogg");
+	sf::Sound shotSound;
+	shotSound.setBuffer(shotSoundBuffer);
 
 	// Цикл координат яблок
-	for (int i = 0; i < NUM_APPLES; i++)
+	for (int i = 0; i < NUM_ENEMIES; i++)
 	{
-		isAppleEaten[i] = false;
-		appleX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
-		appleY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
+		isEnemyKilled[i] = false;
+		enemyX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
+		enemyY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
 
-		applesShape[i].setRadius(APPLE_SIZE / 2.f);
-		applesShape[i].setFillColor(sf::Color::Red);
-		applesShape[i].setOrigin(APPLE_SIZE / 2.f, APPLE_SIZE / 2.f);
-		applesShape[i].setPosition(appleX[i], appleY[i]);
+		enemySprite[i].setTexture(enemyTexture);
+		enemySprite[i].setScale(ENEMY_SIZE / enemyTexture.getSize().x, ENEMY_SIZE / enemyTexture.getSize().y);
+		enemySprite[i].setOrigin(ENEMY_SIZE / 2.f, ENEMY_SIZE / 2.f);
+		enemySprite[i].setPosition(enemyX[i], enemyY[i]);
 	}
 
 	// Цикл координат препядсвий
@@ -127,16 +149,18 @@ int main()
 		obstacleX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
 		obstacleY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
 
-		obstaclesShape[i].setSize(sf::Vector2f(OBSTACLE_SIZE, OBSTACLE_SIZE));
-		obstaclesShape[i].setFillColor(sf::Color::Green);
-		obstaclesShape[i].setOrigin(OBSTACLE_SIZE / 2.f, OBSTACLE_SIZE / 2.f);
-		obstaclesShape[i].setPosition(obstacleX[i], obstacleY[i]);
+		obstacleSprite[i].setTexture(obstacleTexture);
+		obstacleSprite[i].setScale(OBSTACLE_SIZE / enemyTexture.getSize().x, OBSTACLE_SIZE / enemyTexture.getSize().y);
+		obstacleSprite[i].setOrigin(OBSTACLE_SIZE / 2.f, OBSTACLE_SIZE / 2.f);
+		obstacleSprite[i].setPosition(obstacleX[i], obstacleY[i]);
 	}
 
 	int numEatenApples = 0;
 
 	sf::Clock gameClock;
 	float lastTime = gameClock.getElapsedTime().asSeconds();
+
+	backgroundMusic.play();
 
 	while (window.isOpen())
 	{
@@ -193,16 +217,18 @@ int main()
 
 
 		// Условия для того, чтобы, если игрок вышел за пределы окна (1920 х 1080), то игра перезапускалась
-		if (playerX - PLAYER_SIZE / 2.f < 0.f || playerX + PLAYER_SIZE / 2.f > SCREEN_WIDTH ||
-			playerY - PLAYER_SIZE / 2.f < 0.f || playerY + PLAYER_SIZE / 2.f > SCREEN_HEIGTH)
+		if (playerX - PLAYER_SIZE / 5.f < 0.f || playerX + PLAYER_SIZE / 1.2f > SCREEN_WIDTH ||
+			playerY - PLAYER_SIZE / 5.f < 0.f || playerY + PLAYER_SIZE / 1.1f > SCREEN_HEIGTH)
 		{
 			window.draw(gameOverText);
 			window.display();
 			sf::sleep(sf::seconds(2)); // Есть одна проблема с паузой между сессиями. 
-									   // После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
+			// После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
 
 			// Вызываем функцию для перезапуска игры
-			ResetGame(playerX, playerY, playerSpeed, numEatenApples, appleX, appleY, applesShape, obstacleX, obstacleY, obstaclesShape);
+			ResetGame(playerX, playerY, playerSpeed, numEatenApples, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
+			backgroundMusic.stop();
+			backgroundMusic.play();
 		}
 
 		// Цикл для создания коллизии препядсвий
@@ -210,56 +236,62 @@ int main()
 		{
 			if (!isHitObstacle[i])
 			{
-				float dx = fabs(playerX - obstacleX[i]);
-				float dy = fabs(playerY - obstacleY[i]);
+				float squareDistance = (playerX - obstacleX[i]) * (playerX - obstacleX[i]) +
+					(playerY - obstacleY[i]) * (playerY - obstacleY[i]);
 
-				if (dx <= (OBSTACLE_SIZE + PLAYER_SIZE) / 2.f && dy <= (OBSTACLE_SIZE + PLAYER_SIZE) / 2.f)
+				float squareRaduisSum = (OBSTACLE_SIZE + PLAYER_SIZE) * (OBSTACLE_SIZE + PLAYER_SIZE) / 4;
+
+				if (squareDistance <= squareRaduisSum)
 				{
 					window.draw(gameOverText);
 					window.display();
 					sf::sleep(sf::seconds(2)); // Есть одна проблема с паузой между сессиями. 
-											   // После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
+					// После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
 
 					// Вызываем функцию для перезапуска игры
-					ResetGame(playerX, playerY, playerSpeed, numEatenApples, appleX, appleY, applesShape, obstacleX, obstacleY, obstaclesShape);
+					ResetGame(playerX, playerY, playerSpeed, numEatenApples, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
+					backgroundMusic.stop();
+					backgroundMusic.play();
 				}
 			}
 		}
 
 		// Цикл для создания коллизии яблок
-		for (int i = 0; i < NUM_APPLES; i++)
+		for (int i = 0; i < NUM_ENEMIES; i++)
 		{
-			if (!isAppleEaten[i])
+			if (!isEnemyKilled[i])
 			{
-				float squareDistance = (playerX - appleX[i]) * (playerX - appleX[i]) +
-					(playerY - appleY[i]) * (playerY - appleY[i]);
+				float squareDistance = (playerX - enemyX[i]) * (playerX - enemyX[i]) +
+					(playerY - enemyY[i]) * (playerY - enemyY[i]);
 
-				float squareRaduisSum = (APPLE_SIZE + PLAYER_SIZE) * (APPLE_SIZE + PLAYER_SIZE) / 4;
+				float squareRaduisSum = (ENEMY_SIZE + PLAYER_SIZE) * (ENEMY_SIZE + PLAYER_SIZE) / 4;
 
 				// if изменен так, что теперь игра бесконечная. Яблоки появляются вновь, после съедения
 				if (squareDistance <= squareRaduisSum)
 				{
 					++numEatenApples;
+					shotSound.play();
 
-					appleX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
-					appleY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
-					applesShape[i].setPosition(appleX[i], appleY[i]);
+					enemyX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
+					enemyY[i] = rand() / (float)RAND_MAX * SCREEN_HEIGTH;
+					enemySprite[i].setPosition(enemyX[i], enemyY[i]);
 				}
 			}
 
-			scoreText.setString("Apples eaten: " + std::to_string(numEatenApples));
+			scoreText.setString("Demons killed: " + std::to_string(numEatenApples));
 		}
 
 		inputHintText.setPosition(window.getSize().x - 450.f, 10.f);
 
 		window.clear();
-		playerShape.setPosition(playerX, playerY);
+		window.draw(backgroundSprite);
+		playerSprite.setPosition(playerX, playerY);
 
-		for (int i = 0; i < NUM_APPLES; i++)
+		for (int i = 0; i < NUM_ENEMIES; i++)
 		{
-			if (!isAppleEaten[i])
+			if (!isEnemyKilled[i])
 			{
-				window.draw(applesShape[i]);
+				window.draw(enemySprite[i]);
 			}
 		}
 
@@ -267,11 +299,11 @@ int main()
 		{
 			if (!isHitObstacle[i])
 			{
-				window.draw(obstaclesShape[i]);
+				window.draw(obstacleSprite[i]);
 			}
 		}
-		
-		window.draw(playerShape);
+
+		window.draw(playerSprite);
 		window.draw(scoreText);
 		window.draw(inputHintText);
 		window.display();
