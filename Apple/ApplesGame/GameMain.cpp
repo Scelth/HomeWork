@@ -222,13 +222,13 @@ int main()
 		{
 			window.draw(gameOverText);
 			window.display();
-			sf::sleep(sf::seconds(2)); // Есть одна проблема с паузой между сессиями. 
-			// После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
+			sf::sleep(sf::milliseconds(600));
 
 			// Вызываем функцию для перезапуска игры
 			ResetGame(playerX, playerY, playerSpeed, numEatenApples, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
 			backgroundMusic.stop();
 			backgroundMusic.play();
+			playerDirection = 0;
 		}
 
 		// Цикл для создания коллизии препядсвий
@@ -245,13 +245,13 @@ int main()
 				{
 					window.draw(gameOverText);
 					window.display();
-					sf::sleep(sf::seconds(2)); // Есть одна проблема с паузой между сессиями. 
-					// После начала новой сессии, игрок оказывается не в центре, а почти на границе окна.
+					sf::sleep(sf::milliseconds(600));
 
 					// Вызываем функцию для перезапуска игры
 					ResetGame(playerX, playerY, playerSpeed, numEatenApples, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
 					backgroundMusic.stop();
 					backgroundMusic.play();
+					playerDirection = 0;
 				}
 			}
 		}
