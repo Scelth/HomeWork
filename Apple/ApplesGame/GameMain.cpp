@@ -34,14 +34,14 @@ void HandleWindowEvents(sf::RenderWindow& window)
 }
 
 // Функция для перезапуска игры
-void ResetGame(float& playerX, float& playerY, float& playerSpeed, int& numEatenApples,
+void ResetGame(float& playerX, float& playerY, float& playerSpeed, int& numKilledEnemies,
 	float enemyX[], float enemyY[], sf::Sprite enemySprite[],
 	float obstacleX[], float obstacleY[], sf::Sprite obstacleSprite[])
 {
 	playerX = SCREEN_WIDTH / 2.f;
 	playerY = SCREEN_HEIGTH / 2.f;
 	playerSpeed = INITIAL_SPEED;
-	numEatenApples = 0;
+	numKilledEnemies = 0;
 
 	for (int i = 0; i < NUM_ENEMIES; i++)
 	{
@@ -155,7 +155,7 @@ int main()
 		obstacleSprite[i].setPosition(obstacleX[i], obstacleY[i]);
 	}
 
-	int numEatenApples = 0;
+	int numKilledEnemies = 0;
 
 	sf::Clock gameClock;
 	float lastTime = gameClock.getElapsedTime().asSeconds();
@@ -193,8 +193,6 @@ int main()
 
 
 		// Условия для направления ускорения
-		playerSpeed += ACCELIRATION * deltaTime;
-
 		if (playerDirection == 0)
 		{
 			playerX += playerSpeed * deltaTime;
@@ -225,7 +223,7 @@ int main()
 			sf::sleep(sf::milliseconds(600));
 
 			// Вызываем функцию для перезапуска игры
-			ResetGame(playerX, playerY, playerSpeed, numEatenApples, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
+			ResetGame(playerX, playerY, playerSpeed, numKilledEnemies, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
 			backgroundMusic.stop();
 			backgroundMusic.play();
 			playerDirection = 0;
@@ -248,7 +246,7 @@ int main()
 					sf::sleep(sf::milliseconds(600));
 
 					// Вызываем функцию для перезапуска игры
-					ResetGame(playerX, playerY, playerSpeed, numEatenApples, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
+					ResetGame(playerX, playerY, playerSpeed, numKilledEnemies, enemyX, enemyY, enemySprite, obstacleX, obstacleY, obstacleSprite);
 					backgroundMusic.stop();
 					backgroundMusic.play();
 					playerDirection = 0;
@@ -269,7 +267,8 @@ int main()
 				// if изменен так, что теперь игра бесконечная. Яблоки появляются вновь, после съедения
 				if (squareDistance <= squareRaduisSum)
 				{
-					++numEatenApples;
+					++numKilledEnemies;
+					playerSpeed += ACCELIRATION;
 					shotSound.play();
 
 					enemyX[i] = rand() / (float)RAND_MAX * SCREEN_WIDTH;
@@ -278,7 +277,7 @@ int main()
 				}
 			}
 
-			scoreText.setString("Demons killed: " + std::to_string(numEatenApples));
+			scoreText.setString("Demons killed: " + std::to_string(numKilledEnemies));
 		}
 
 		inputHintText.setPosition(window.getSize().x - 450.f, 10.f);
