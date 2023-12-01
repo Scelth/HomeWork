@@ -1,0 +1,18 @@
+#pragma once
+#include <string>
+#include <SFML/Graphics.hpp>
+
+namespace Doom2D
+{
+	const std::string RESOURCES_PATH = "Resources/";
+	const int SCREEN_WIDTH = 1920;
+	const int SCREEN_HEIGTH = 1080;
+	const float INITIAL_SPEED = 100.f;
+	const float PLAYER_SIZE = 40.f;
+	const float ACCELIRATION = 20.f;
+	const int NUM_ENEMIES = 20;
+	const float ENEMY_SIZE = 40.f;
+	const int NUM_OBSTACLES = 10;
+	const float OBSTACLE_SIZE = 40.f;
+	const float PAUSE_LENGH = 3.f;
+}
