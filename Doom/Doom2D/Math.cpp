@@ -1,5 +1,4 @@
 #include "Math.h"
-#include <cstdlib>
 #include <SFML/Graphics.hpp>
 
 namespace Doom2D
@@ -12,6 +11,23 @@ namespace Doom2D
 		float squareRaduisSum = (cercle2Size + cercle1Size) * (cercle2Size + cercle1Size);
 
 		return squareDistance <= squareRaduisSum;
+	}
+
+	bool isRectangleCircleCollide(Position2D rectanglePosition, float playerSize, Position2D circlePosition, float circleSize)
+	{
+		// Находим ближайшую точку на прямоугольнике к центру круга
+		float closestX = std::max(rectanglePosition.X - (playerSize / 2.f), std::min(circlePosition.X, rectanglePosition.X + (playerSize / 2.f)));
+		float closestY = std::max(rectanglePosition.Y - (playerSize / 2.f), std::min(circlePosition.Y, rectanglePosition.Y + (playerSize / 2.f)));
+
+		// Вычисляем расстояние между центром круга и ближайшей точкой на прямоугольнике
+		float distanceX = circlePosition.X - closestX;
+		float distanceY = circlePosition.Y - closestY;
+
+		// Проверяем, пересекаются ли круг и прямоугольник
+		float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+		float circleRadius = (circleSize / 2.f) * (circleSize / 2.f);
+
+		return distanceSquared <= circleRadius;
 	}
 
 	Position2D GetRandomPosition(float screenWidth, float screenHeight)

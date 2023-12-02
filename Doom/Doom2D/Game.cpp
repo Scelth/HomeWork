@@ -45,6 +45,7 @@ namespace Doom2D
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
 				game.player.playerDirection = PlayerDirection::Right;
+				SetSpriteSize(game.player.playerSprite, PLAYER_SIZE, PLAYER_SIZE);
 			}
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -55,6 +56,7 @@ namespace Doom2D
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
 				game.player.playerDirection = PlayerDirection::Left;
+				SetSpriteSize(game.player.playerSprite, -PLAYER_SIZE, PLAYER_SIZE);
 			}
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -82,10 +84,18 @@ namespace Doom2D
 				break;
 			}
 
+			// Условия для того, чтобы, если игрок вышел за пределы окна (1920 х 1080), то игра перезапускалась
+			if (game.player.playerPosition.X - PLAYER_SIZE / 1.f < 0.f || game.player.playerPosition.X + PLAYER_SIZE / 1.f > SCREEN_WIDTH ||
+				game.player.playerPosition.Y - PLAYER_SIZE / 8.f < 0.f || game.player.playerPosition.Y + PLAYER_SIZE / 1.f > SCREEN_HEIGTH)
+			{
+				game.isGameFinished = true;
+				game.gameFinishTime = lastTime;
+			}
+
 			// Цикл для создания коллизии врагов
 			for (int i = 0; i < NUM_ENEMIES; i++)
 			{
-				if (isCercleCollide(game.player.playerPosition, PLAYER_SIZE / 2.f, game.enemy[i].enemyPosition[i], ENEMY_SIZE / 2.f))
+				if (isRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition[i], ENEMY_SIZE))
 				{
 					++game.numKilledEnemies;
 					game.player.playerSpeed += ACCELIRATION;
@@ -97,18 +107,10 @@ namespace Doom2D
 				game.text.scoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
 			}
 
-			// Условия для того, чтобы, если игрок вышел за пределы окна (1920 х 1080), то игра перезапускалась
-			if (game.player.playerPosition.X - PLAYER_SIZE / 1.1f < 0.f || game.player.playerPosition.X + PLAYER_SIZE / 1.1f > SCREEN_WIDTH ||
-				game.player.playerPosition.Y - PLAYER_SIZE / 6.f < 0.f || game.player.playerPosition.Y + PLAYER_SIZE / 0.75f > SCREEN_HEIGTH)
-			{
-				game.isGameFinished = true;
-				game.gameFinishTime = lastTime;
-			}
-
 			// Цикл для создания коллизии препядсвий
 			for (int i = 0; i < NUM_OBSTACLES; i++)
 			{
-				if (isCercleCollide(game.player.playerPosition, PLAYER_SIZE / 2.f, game.obstacle[i].obstaclePosition[i], OBSTACLE_SIZE / 2.f))
+				if (isRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition[i], OBSTACLE_SIZE))
 				{
 					game.isGameFinished = true;
 					game.gameFinishTime = lastTime;
