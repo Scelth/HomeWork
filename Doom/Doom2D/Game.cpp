@@ -127,6 +127,11 @@ namespace Doom2D
 
 				game.sound.backgroundMusic.stop();
 				game.sound.gameOverSound.play();
+
+				while (game.sound.gameOverSound.getStatus() == sf::Sound::Playing) 
+				{
+					sf::sleep(sf::milliseconds(10));
+				}
 			}
 
 			else
