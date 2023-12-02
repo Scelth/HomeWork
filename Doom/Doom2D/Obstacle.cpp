@@ -5,7 +5,7 @@ namespace Doom2D
 {
 	void InitObstacle(Obstacle& obstacle, const Game& game)
 	{
-		// Цикл координат препядсвий
+		// The cycle of obstacle coordinates
 		for (int i = 0; i < NUM_OBSTACLES; i++)
 		{
 			obstacle.obstaclePosition[i] = GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH);

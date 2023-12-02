@@ -5,7 +5,7 @@ namespace Doom2D
 {
 	void InitEnemy(Enemy& enemy, const Game& game)
 	{
-		// ÷икл координат €блок
+		// The cycle of coordinates of enemies
 		for (int i = 0; i < NUM_ENEMIES; i++)
 		{
 			enemy.enemyPosition[i] = GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH);

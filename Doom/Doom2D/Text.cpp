@@ -4,10 +4,10 @@ namespace Doom2D
 {
 	void InitText(Text& text)
 	{
-		// Шрифт
+		// Font
 		text.font.loadFromFile(RESOURCES_PATH + "Fonts/Linepixels.ttf");
 
-		// Текст
+		// Text
 		text.scoreText.setFont(text.font);
 		text.scoreText.setCharacterSize(24);
 		text.scoreText.setFillColor(sf::Color::Yellow);

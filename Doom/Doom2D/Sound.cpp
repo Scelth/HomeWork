@@ -5,7 +5,7 @@ namespace Doom2D
 	void InitSound(Sound& sound)
 	{
 		sound.backgroundMusic.openFromFile(RESOURCES_PATH + "Audio/Background.ogg");
-		sound.backgroundMusic.setLoop(true); // Зацикливание аудио
+		sound.backgroundMusic.setLoop(true);
 
 		sound.shotSoundBuffer.loadFromFile(RESOURCES_PATH + "Audio/Shot.ogg");
 		sound.shotSound.setBuffer(sound.shotSoundBuffer);

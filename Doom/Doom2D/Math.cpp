@@ -15,15 +15,15 @@ namespace Doom2D
 
 	bool isRectangleCircleCollide(Position2D rectanglePosition, float playerSize, Position2D circlePosition, float circleSize)
 	{
-		// Находим ближайшую точку на прямоугольнике к центру круга
+		// Find the nearest point on the rectangle to the center of the circle
 		float closestX = std::max(rectanglePosition.X - (playerSize / 2.f), std::min(circlePosition.X, rectanglePosition.X + (playerSize / 2.f)));
 		float closestY = std::max(rectanglePosition.Y - (playerSize / 2.f), std::min(circlePosition.Y, rectanglePosition.Y + (playerSize / 2.f)));
 
-		// Вычисляем расстояние между центром круга и ближайшей точкой на прямоугольнике
+		// Calculate the distance between the center of the circle and the nearest point on the rectangle
 		float distanceX = circlePosition.X - closestX;
 		float distanceY = circlePosition.Y - closestY;
 
-		// Проверяем, пересекаются ли круг и прямоугольник
+		// Check if the circle and rectangle intersect
 		float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
 		float circleRadius = (circleSize / 2.f) * (circleSize / 2.f);
 

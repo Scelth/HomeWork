@@ -2,7 +2,7 @@
 
 namespace Doom2D 
 {
-	// Функция для перезапуска игры
+	// Function to restart the game
 	void RestartGame(Game& game)
 	{
 		InitBackground(game.background, game);
@@ -41,7 +41,7 @@ namespace Doom2D
 	{
 		if (!game.isGameFinished)
 		{
-			// Условия для привязки клавиш к направления
+			// Conditions for linking keys to directions
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
 				game.player.playerDirection = PlayerDirection::Right;
@@ -84,7 +84,7 @@ namespace Doom2D
 				break;
 			}
 
-			// Условия для того, чтобы, если игрок вышел за пределы окна (1920 х 1080), то игра перезапускалась
+			// Conditions so that if the player goes outside the window (1920 x 1080), the game restarts
 			if (game.player.playerPosition.X - PLAYER_SIZE / 1.f < 0.f || game.player.playerPosition.X + PLAYER_SIZE / 1.f > SCREEN_WIDTH ||
 				game.player.playerPosition.Y - PLAYER_SIZE / 8.f < 0.f || game.player.playerPosition.Y + PLAYER_SIZE / 1.f > SCREEN_HEIGTH)
 			{
@@ -92,7 +92,7 @@ namespace Doom2D
 				game.gameFinishTime = lastTime;
 			}
 
-			// Цикл для создания коллизии врагов
+			// A loop to create a collision of enemies
 			for (int i = 0; i < NUM_ENEMIES; i++)
 			{
 				if (isRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition[i], ENEMY_SIZE))
@@ -107,7 +107,7 @@ namespace Doom2D
 				game.text.scoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
 			}
 
-			// Цикл для создания коллизии препядсвий
+			// A cycle for creating a collision of obstacles
 			for (int i = 0; i < NUM_OBSTACLES; i++)
 			{
 				if (isRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition[i], OBSTACLE_SIZE))
@@ -136,7 +136,7 @@ namespace Doom2D
 
 			else
 			{
-				// Вызываем функцию для перезапуска игры
+				// Calling the game restart function
 				RestartGame(game);
 				game.isGameFinished = false;
 			}
@@ -168,7 +168,7 @@ namespace Doom2D
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// Закрыть окно при нажатии на крестик или ESC
+			// Close the window when clicking on the X or ESC
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();

@@ -30,7 +30,6 @@ namespace Doom2D
 		sf::Texture obstacleTexture;
 	};
 
-	// Функция для перезапуска игры
 	void RestartGame(Game& gameState);
 
 	void InitGame(Game& gameState);
