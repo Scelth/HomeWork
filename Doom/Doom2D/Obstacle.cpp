@@ -12,7 +12,7 @@ namespace Doom2D
 
 			obstacle.obstacleSprite[i].setTexture(game.obstacleTexture);
 			SetSpriteSize(obstacle.obstacleSprite[i], OBSTACLE_SIZE, OBSTACLE_SIZE);
-			SetSpriteOrigin(obstacle.obstacleSprite[i], OBSTACLE_SIZE);
+			SetSpriteOrigin(obstacle.obstacleSprite[i], 0.5f, 0.5f);
 		}
 	}
 

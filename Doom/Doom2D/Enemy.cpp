@@ -12,7 +12,7 @@ namespace Doom2D
 
 			enemy.enemySprite[i].setTexture(game.enemyTexture);
 			SetSpriteSize(enemy.enemySprite[i], ENEMY_SIZE, ENEMY_SIZE);
-			SetSpriteOrigin(enemy.enemySprite[i], ENEMY_SIZE);
+			SetSpriteOrigin(enemy.enemySprite[i], 0.5f, 0.5f);
 		}
 	}
 

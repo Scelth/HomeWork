@@ -11,7 +11,7 @@ namespace Doom2D
 
 		player.playerSprite.setTexture(game.playerTexture);
 		SetSpriteSize(player.playerSprite, PLAYER_SIZE, PLAYER_SIZE);
-		SetSpriteOrigin(player.playerSprite, PLAYER_SIZE);
+		SetSpriteOrigin(player.playerSprite, 0.5f, 0.5f);
 	}
 
 	void DrawPlayer(Player& player, sf::RenderWindow& window)

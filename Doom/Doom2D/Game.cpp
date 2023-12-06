@@ -85,8 +85,8 @@ namespace Doom2D
 			}
 
 			// Conditions so that if the player goes outside the window (1920 x 1080), the game restarts
-			if (game.player.playerPosition.X - PLAYER_SIZE / 1.f < 0.f || game.player.playerPosition.X + PLAYER_SIZE / 1.f > SCREEN_WIDTH ||
-				game.player.playerPosition.Y - PLAYER_SIZE / 8.f < 0.f || game.player.playerPosition.Y + PLAYER_SIZE / 1.f > SCREEN_HEIGTH)
+			if (game.player.playerPosition.X - PLAYER_SIZE / 2.f < 0.f || game.player.playerPosition.X + PLAYER_SIZE / 2.f > SCREEN_WIDTH ||
+				game.player.playerPosition.Y - PLAYER_SIZE / 2.f < 0.f || game.player.playerPosition.Y + PLAYER_SIZE / 2.f > SCREEN_HEIGTH)
 			{
 				game.isGameFinished = true;
 				game.gameFinishTime = lastTime;
@@ -130,7 +130,7 @@ namespace Doom2D
 
 				while (game.sound.gameOverSound.getStatus() == sf::Sound::Playing) 
 				{
-					sf::sleep(sf::milliseconds(10));
+					sf::sleep(sf::milliseconds(5));
 				}
 			}
 

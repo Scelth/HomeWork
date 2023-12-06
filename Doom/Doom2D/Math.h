@@ -21,5 +21,5 @@ namespace Doom2D
 	Position2D GetRandomPosition(float screenWidth, float screenHeight);
 
 	void SetSpriteSize(sf::Sprite& sprite, float desiredWidth, float desiredHeight);
-	void SetSpriteOrigin(sf::Sprite& sprite, float size);
+	void SetSpriteOrigin(sf::Sprite& sprite, float originX, float originY);
 }

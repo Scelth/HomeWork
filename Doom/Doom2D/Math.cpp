@@ -3,15 +3,15 @@
 
 namespace Doom2D
 {
-	bool isCercleCollide(Position2D cercle1Position, float cercle1Size, Position2D cercle2Position, float cercle2Size)
-	{
-		float squareDistance = (cercle1Position.X - cercle2Position.X) * (cercle1Position.X - cercle2Position.X) +
-			(cercle1Position.Y - cercle2Position.Y) * (cercle1Position.Y - cercle2Position.Y);
-
-		float squareRaduisSum = (cercle2Size + cercle1Size) * (cercle2Size + cercle1Size);
-
-		return squareDistance <= squareRaduisSum;
-	}
+	//bool isCercleCollide(Position2D cercle1Position, float cercle1Size, Position2D cercle2Position, float cercle2Size)
+	//{
+	//	float squareDistance = (cercle1Position.X - cercle2Position.X) * (cercle1Position.X - cercle2Position.X) +
+	//		(cercle1Position.Y - cercle2Position.Y) * (cercle1Position.Y - cercle2Position.Y);
+	//
+	//	float squareRaduisSum = (cercle2Size + cercle1Size) * (cercle2Size + cercle1Size);
+	//
+	//	return squareDistance <= squareRaduisSum;
+	//}
 
 	bool isRectangleCircleCollide(Position2D rectanglePosition, float playerSize, Position2D circlePosition, float circleSize)
 	{
@@ -47,9 +47,9 @@ namespace Doom2D
 		sprite.setScale(scale);
 	}
 
-	void SetSpriteOrigin(sf::Sprite& sprite, float size) 
+	void SetSpriteOrigin(sf::Sprite& sprite, float originX, float originY)
 	{
-		sf::FloatRect spriteReact = sprite.getLocalBounds();
-		sprite.setOrigin(size / spriteReact.width, size / spriteReact.height);
+		sf::FloatRect spriteRect = sprite.getLocalBounds();
+		sprite.setOrigin(originX * spriteRect.width, originY * spriteRect.height);
 	}
 }
