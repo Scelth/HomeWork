@@ -15,7 +15,7 @@ namespace Doom2D
 
 	typedef Vector2D Position2D;
 
-	bool isCercleCollide(Position2D cercle1Position, float cercle1Size, Position2D cercle2Position, float cercle2Size);
+	//bool isCercleCollide(Position2D cercle1Position, float cercle1Size, Position2D cercle2Position, float cercle2Size);
 	bool isRectangleCircleCollide(Position2D rectanglePosition, float playerSize, Position2D circlePosition, float circleRadius);
 
 	Position2D GetRandomPosition(float screenWidth, float screenHeight);
