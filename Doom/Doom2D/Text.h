@@ -3,13 +3,14 @@
 
 namespace Doom2D
 {
-	struct Text
+	struct GameText
 	{
 		sf::Font font;
 		sf::Text scoreText;
 		sf::Text inputHintText;
 		sf::Text gameOverText;
+		sf::Text totalScoreText;
 	};
 
-	void InitText(Text& text);
+	void InitText(GameText& text);
 }

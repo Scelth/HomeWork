@@ -3,12 +3,12 @@
 
 namespace Doom2D
 {
+	struct Game;
+
 	struct Background
 	{
 		sf::Sprite backgroundSprite;
 	};
-
-	struct Game;
 
 	void InitBackground(Background& background, const Game& game);
 }

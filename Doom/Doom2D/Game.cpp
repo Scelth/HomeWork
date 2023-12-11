@@ -1,6 +1,6 @@
 #include "Game.h"
 
-namespace Doom2D 
+namespace Doom2D
 {
 	// Function to restart the game
 	void RestartGame(Game& game)
@@ -34,71 +34,38 @@ namespace Doom2D
 		game.enemyTexture.loadFromFile(RESOURCES_PATH + "Assets/Enemy.png");
 		game.obstacleTexture.loadFromFile(RESOURCES_PATH + "Assets/Fire.png");
 
+		// Font
+		game.text.font.loadFromFile(RESOURCES_PATH + "Fonts/Linepixels.ttf");
+
 		RestartGame(game);
+	}
+
+	void GameFinished(Game& game, float lastTime)
+	{
+		game.isGameFinished = true;
+		game.gameFinishTime = lastTime;
 	}
 
 	void UpdateGame(Game& game, float deltaTime, float lastTime, sf::RenderWindow& window)
 	{
 		if (!game.isGameFinished)
 		{
-			// Conditions for linking keys to directions
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			{
-				game.player.playerDirection = PlayerDirection::Right;
-				SetSpriteSize(game.player.playerSprite, PLAYER_SIZE, PLAYER_SIZE);
-			}
-
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-			{
-				game.player.playerDirection = PlayerDirection::Up;
-			}
-
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			{
-				game.player.playerDirection = PlayerDirection::Left;
-				SetSpriteSize(game.player.playerSprite, -PLAYER_SIZE, PLAYER_SIZE);
-			}
-
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			{
-				game.player.playerDirection = PlayerDirection::Down;
-			}
-
-
-			switch (game.player.playerDirection)
-			{
-			case PlayerDirection::Right:
-				game.player.playerPosition.X += game.player.playerSpeed * deltaTime;
-				break;
-
-			case PlayerDirection::Up:
-				game.player.playerPosition.Y -= game.player.playerSpeed * deltaTime;
-				break;
-
-			case PlayerDirection::Left:
-				game.player.playerPosition.X -= game.player.playerSpeed * deltaTime;
-				break;
-
-			case PlayerDirection::Down:
-				game.player.playerPosition.Y += game.player.playerSpeed * deltaTime;
-				break;
-			}
+			UpdatePlayer(game.player, deltaTime);
 
 			// Conditions so that if the player goes outside the window (1920 x 1080), the game restarts
 			if (game.player.playerPosition.X - PLAYER_SIZE / 2.f < 0.f || game.player.playerPosition.X + PLAYER_SIZE / 2.f > SCREEN_WIDTH ||
 				game.player.playerPosition.Y - PLAYER_SIZE / 2.f < 0.f || game.player.playerPosition.Y + PLAYER_SIZE / 2.f > SCREEN_HEIGTH)
 			{
-				game.isGameFinished = true;
-				game.gameFinishTime = lastTime;
+				GameFinished(game, lastTime);
 			}
 
 			// A loop to create a collision of enemies
 			for (int i = 0; i < NUM_ENEMIES; i++)
 			{
-				if (isRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition[i], ENEMY_SIZE))
+				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition[i], ENEMY_SIZE))
 				{
 					++game.numKilledEnemies;
-					game.player.playerSpeed += ACCELIRATION;
+					SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
 					game.sound.shotSound.play();
 
 					game.enemy[i].enemyPosition[i] = GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH);
@@ -110,10 +77,9 @@ namespace Doom2D
 			// A cycle for creating a collision of obstacles
 			for (int i = 0; i < NUM_OBSTACLES; i++)
 			{
-				if (isRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition[i], OBSTACLE_SIZE))
+				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition[i], OBSTACLE_SIZE))
 				{
-					game.isGameFinished = true;
-					game.gameFinishTime = lastTime;
+					GameFinished(game, lastTime);
 				}
 			}
 		}
@@ -123,12 +89,14 @@ namespace Doom2D
 			if (lastTime - game.gameFinishTime <= PAUSE_LENGH)
 			{
 				window.draw(game.text.gameOverText);
+				game.text.totalScoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
+				window.draw(game.text.totalScoreText);
 				window.display();
 
 				game.sound.backgroundMusic.stop();
 				game.sound.gameOverSound.play();
 
-				while (game.sound.gameOverSound.getStatus() == sf::Sound::Playing) 
+				while (game.sound.gameOverSound.getStatus() == sf::Sound::Playing)
 				{
 					sf::sleep(sf::milliseconds(5));
 				}

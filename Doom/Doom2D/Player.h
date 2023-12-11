@@ -5,6 +5,8 @@
 
 namespace Doom2D
 {
+	struct Game;
+
 	enum class PlayerDirection
 	{
 		Right = 0,
@@ -21,8 +23,9 @@ namespace Doom2D
 		sf::Sprite playerSprite;
 	};
 
-	struct Game;
-
 	void InitPlayer(Player& player, const Game& game);
+	void SetPlayerSpeed(Player& player, float speed);
+	float GetPlayerSpeed(const Player& player);
+	void UpdatePlayer(Player& player, float deltaTime);
 	void DrawPlayer(Player& player, sf::RenderWindow& window);
 }

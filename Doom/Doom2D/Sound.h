@@ -4,7 +4,7 @@
 
 namespace Doom2D
 {
-	struct Sound
+	struct GameSound
 	{
 		sf::Music backgroundMusic;
 
@@ -15,5 +15,5 @@ namespace Doom2D
 		sf::Sound gameOverSound;
 	};
 
-	void InitSound(Sound& sound);
+	void InitSound(GameSound& sound);
 }

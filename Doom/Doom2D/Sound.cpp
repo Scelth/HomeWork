@@ -2,7 +2,7 @@
 
 namespace Doom2D
 {
-	void InitSound(Sound& sound)
+	void InitSound(GameSound& sound)
 	{
 		sound.backgroundMusic.openFromFile(RESOURCES_PATH + "Audio/Background.ogg");
 		sound.backgroundMusic.setLoop(true);
