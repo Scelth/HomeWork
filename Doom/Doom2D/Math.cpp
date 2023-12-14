@@ -30,6 +30,11 @@ namespace Doom2D
 		return result;
 	}
 
+	short GetRandomEnemies(short maxEnemies)
+	{
+		return rand() % (maxEnemies + 1);
+	}
+
 	void SetSpriteSize(sf::Sprite& sprite, float desiredWidth, float desiredHeight)
 	{
 		sf::FloatRect spriteReact = sprite.getLocalBounds();

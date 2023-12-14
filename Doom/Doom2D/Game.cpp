@@ -10,12 +10,12 @@ namespace Doom2D
 
 		for (int i = 0; i < NUM_ENEMIES; i++)
 		{
-			InitEnemy(game.enemy[i], game);
+			SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 		}
 
 		for (int i = 0; i < NUM_OBSTACLES; i++)
 		{
-			InitObstacle(game.obstacle[i], game);
+			SetObstaclePosition(game.obstacle[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 		}
 
 		InitText(game.text);
@@ -36,6 +36,16 @@ namespace Doom2D
 
 		// Font
 		game.text.font.loadFromFile(RESOURCES_PATH + "Fonts/Linepixels.ttf");
+
+		for (int i = 0; i < NUM_ENEMIES; ++i)
+		{
+			InitEnemy(game.enemy[i], game);
+		}
+
+		for (int i = 0; i < NUM_OBSTACLES; ++i)
+		{
+			InitObstacle(game.obstacle[i], game);
+		}
 
 		RestartGame(game);
 	}
@@ -62,13 +72,14 @@ namespace Doom2D
 			// A loop to create a collision of enemies
 			for (int i = 0; i < NUM_ENEMIES; i++)
 			{
-				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition[i], ENEMY_SIZE))
+				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition, ENEMY_SIZE))
 				{
+					SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 					++game.numKilledEnemies;
 					SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
 					game.sound.shotSound.play();
 
-					game.enemy[i].enemyPosition[i] = GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH);
+					//game.enemy[i].enemyPosition = GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH);
 				}
 
 				game.text.scoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
@@ -77,7 +88,7 @@ namespace Doom2D
 			// A cycle for creating a collision of obstacles
 			for (int i = 0; i < NUM_OBSTACLES; i++)
 			{
-				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition[i], OBSTACLE_SIZE))
+				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition, OBSTACLE_SIZE))
 				{
 					GameFinished(game, lastTime);
 				}
@@ -119,12 +130,12 @@ namespace Doom2D
 
 		for (int i = 0; i < NUM_ENEMIES; i++)
 		{
-			DrawEnemy(game.enemy, window);
+			DrawEnemy(game.enemy[i], window);
 		}
 
 		for (int i = 0; i < NUM_OBSTACLES; i++)
 		{
-			DrawObstacle(game.obstacle, window);
+			DrawObstacle(game.obstacle[i], window);
 		}
 
 		window.draw(game.text.scoreText);

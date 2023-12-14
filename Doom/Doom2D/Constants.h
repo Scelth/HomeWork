@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cstdlib>
 #include <SFML/Graphics.hpp>
 
 namespace Doom2D
@@ -15,4 +16,6 @@ namespace Doom2D
 	const short NUM_OBSTACLES = 10;
 	const float OBSTACLE_SIZE = 40.f;
 	const float PAUSE_LENGH = 3.f;
+
+	//extern short NUM_ENEMIES;
 }
