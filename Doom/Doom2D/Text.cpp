@@ -24,5 +24,22 @@ namespace Doom2D
 		text.gameOverText.setFillColor(sf::Color::White);
 		text.gameOverText.setString("GAME OVER");
 		text.gameOverText.setPosition(SCREEN_WIDTH / 2.5f, SCREEN_HEIGTH / 2.5f);
+
+		text.youWinText.setFont(text.font);
+		text.youWinText.setCharacterSize(50);
+		text.youWinText.setFillColor(sf::Color::White);
+		text.youWinText.setString("YOU WIN!");
+		text.youWinText.setPosition(SCREEN_WIDTH / 2.5f, SCREEN_HEIGTH / 2.5f);
+	}
+
+	void InitSettingsText(GameText& text)
+	{
+		text.font.loadFromFile(RESOURCES_PATH + "Fonts/Linepixels.ttf");
+
+		text.settingText.setFont(text.font);
+		text.settingText.setCharacterSize(30);
+		text.settingText.setFillColor(sf::Color::White);
+		text.settingText.setString("SELECT SETTINGS \n\nChoose two options \n1 - With finite number of enemies. \n2 - With infinite number of enemies. \n3 - With player acceleration. \n4 - Without player acceleration. \n0 - Exit the settings or exit the game");
+		text.settingText.setPosition(SCREEN_WIDTH / 2.5f, SCREEN_HEIGTH / 2.5f);
 	}
 }

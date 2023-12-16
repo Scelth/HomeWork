@@ -16,8 +16,29 @@ namespace Doom2D
 		window.draw(enemy.enemySprite);
 	}
 
+	void CreateEnemies(Enemy*& enemy, const Game& game)
+	{
+		DeallocateEnemies(enemy);
+		NUM_ENEMIES = GetRandomEnemies(MAX_NUM_ENEMIES);
+		enemy = new Enemy[NUM_ENEMIES];
+
+		for (int i = 0; i < NUM_ENEMIES; ++i)
+		{
+			InitEnemy(enemy[i], game);
+		}
+	}
+
 	void SetEnemyPosition(Enemy& enemy, const Position2D& position)
 	{
 		enemy.enemyPosition = position;
+	}
+
+	void DeallocateEnemies(Enemy*& enemy)
+	{
+		if (enemy != nullptr)
+		{
+			delete[] enemy;
+			enemy = nullptr;
+		}
 	}
 }

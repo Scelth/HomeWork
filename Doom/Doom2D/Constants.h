@@ -11,11 +11,11 @@ namespace Doom2D
 	const float INITIAL_SPEED = 100.f;
 	const float PLAYER_SIZE = 40.f;
 	const float ACCELERATION = 20.f;
-	const short NUM_ENEMIES = 20;
+	const short MAX_NUM_ENEMIES = 20;
 	const float ENEMY_SIZE = 40.f;
 	const short NUM_OBSTACLES = 10;
 	const float OBSTACLE_SIZE = 40.f;
 	const float PAUSE_LENGH = 3.f;
 
-	//extern short NUM_ENEMIES;
+	extern short NUM_ENEMIES;
 }

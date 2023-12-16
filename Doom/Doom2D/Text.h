@@ -10,7 +10,10 @@ namespace Doom2D
 		sf::Text inputHintText;
 		sf::Text gameOverText;
 		sf::Text totalScoreText;
+		sf::Text settingText;
+		sf::Text youWinText;
 	};
 
 	void InitText(GameText& text);
+	void InitSettingsText(GameText& text);
 }

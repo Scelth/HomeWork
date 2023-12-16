@@ -2,9 +2,13 @@
 
 namespace Doom2D
 {
+	short NUM_ENEMIES;
+
 	// Function to restart the game
 	void RestartGame(Game& game)
 	{
+		CreateEnemies(game.enemy, game);
+
 		InitBackground(game.background, game);
 		InitPlayer(game.player, game);
 
@@ -33,14 +37,6 @@ namespace Doom2D
 		game.playerTexture.loadFromFile(RESOURCES_PATH + "Assets/Doom.png");
 		game.enemyTexture.loadFromFile(RESOURCES_PATH + "Assets/Enemy.png");
 		game.obstacleTexture.loadFromFile(RESOURCES_PATH + "Assets/Fire.png");
-
-		// Font
-		game.text.font.loadFromFile(RESOURCES_PATH + "Fonts/Linepixels.ttf");
-
-		for (int i = 0; i < NUM_ENEMIES; ++i)
-		{
-			InitEnemy(game.enemy[i], game);
-		}
 
 		for (int i = 0; i < NUM_OBSTACLES; ++i)
 		{
@@ -74,12 +70,23 @@ namespace Doom2D
 			{
 				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition, ENEMY_SIZE))
 				{
-					SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
-					++game.numKilledEnemies;
-					SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
-					game.sound.shotSound.play();
 
-					//game.enemy[i].enemyPosition = GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH);
+					game.enemy[i].isAlive = false;
+					SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+
+					game.numKilledEnemies++;
+
+					if (game.gameSettings.choiñe & (1 << 2))
+					{
+						SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
+					}
+
+					else if (game.gameSettings.choiñe & (1 << 3))
+					{
+						SetPlayerSpeed(game.player, GetPlayerSpeed(game.player));
+					}
+
+					game.sound.shotSound.play();
 				}
 
 				game.text.scoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
@@ -130,7 +137,36 @@ namespace Doom2D
 
 		for (int i = 0; i < NUM_ENEMIES; i++)
 		{
-			DrawEnemy(game.enemy[i], window);
+			if (game.gameSettings.choiñe & (1 << 0))
+			{
+				if (game.enemy[i].isAlive)
+				{
+					DrawEnemy(game.enemy[i], window);
+				}
+			}
+
+			else if (game.gameSettings.choiñe & (1 << 1))
+			{
+				DrawEnemy(game.enemy[i], window);
+			}
+		}
+
+		if ((game.numKilledEnemies == NUM_ENEMIES) && (game.gameSettings.choiñe & (1 << 0)))
+		{
+			window.draw(game.text.youWinText);
+			game.text.totalScoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
+			window.draw(game.text.totalScoreText);
+			window.display();
+
+			game.sound.backgroundMusic.stop();
+			game.sound.youWinSound.play();
+
+			while (game.sound.youWinSound.getStatus() == sf::Sound::Playing)
+			{
+				sf::sleep(sf::milliseconds(5));
+			}
+
+			RestartGame(game);
 		}
 
 		for (int i = 0; i < NUM_OBSTACLES; i++)

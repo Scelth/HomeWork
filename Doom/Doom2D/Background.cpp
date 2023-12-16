@@ -7,4 +7,9 @@ namespace Doom2D
 	{
 		background.backgroundSprite.setTexture(game.backgroundTexture);
 	}
+
+	void InitSettingsBackground(Background& background)
+	{
+		background.backgroundColor.setFillColor(sf::Color::Black);
+	}
 }

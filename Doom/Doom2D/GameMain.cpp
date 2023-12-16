@@ -9,6 +9,7 @@
 #include "Text.h"
 #include "Sound.h"
 #include "Game.h"
+#include "Settings.h"
 
 int main()
 {
@@ -19,8 +20,11 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGTH), "Doom!");
 
-	Game gameState;
-	InitGame(gameState);
+	Game game;
+
+	InitSettings(game.gameSettings, game, window);
+
+	InitGame(game);
 
 	sf::Clock gameClock;
 	float lastTime = gameClock.getElapsedTime().asSeconds();
@@ -33,10 +37,10 @@ int main()
 		float deltaTime = currentTime - lastTime;
 		lastTime = currentTime;
 
-		UpdateGame(gameState, deltaTime, lastTime, window);
+		UpdateGame(game, deltaTime, lastTime, window);
 
 		window.clear();
-		DrawGame(gameState, window);
+		DrawGame(game, window);
 		window.display();
 	}
 

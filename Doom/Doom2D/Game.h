@@ -6,6 +6,7 @@
 #include "Obstacle.h"
 #include "Text.h"
 #include "Sound.h"
+#include "Settings.h"
 
 namespace Doom2D
 {
@@ -13,10 +14,13 @@ namespace Doom2D
 	{
 		Player player;
 		Background background;
-		Enemy enemy[NUM_ENEMIES];
+		Enemy* enemy = nullptr;
 		Obstacle obstacle[NUM_OBSTACLES];
 		GameText text;
 		GameSound sound;
+		GameSettings gameSettings;
+
+		sf::RectangleShape backgroundColor;
 
 		sf::Texture backgroundTexture;
 		sf::Texture playerTexture;

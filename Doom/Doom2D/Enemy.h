@@ -11,9 +11,12 @@ namespace Doom2D
 	{
 		Position2D enemyPosition;
 		sf::Sprite enemySprite;
+		bool isAlive;
 	};
 
 	void InitEnemy(Enemy& enemy, const Game& game);
 	void SetEnemyPosition(Enemy& enemy, const Position2D& position);
 	void DrawEnemy(Enemy& enemy, sf::RenderWindow& window);
+	void CreateEnemies(Enemy*& enemy, const Game& game);
+	void DeallocateEnemies(Enemy*& enemy);
 }
