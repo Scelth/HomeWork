@@ -70,11 +70,21 @@ namespace Doom2D
 			{
 				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition, ENEMY_SIZE))
 				{
+					if (game.gameSettings.choiñe & (1 << 0))
+					{
+						if (game.enemy[i].isAlive)
+						{
+							game.enemy[i].isAlive = false;
+							SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+							game.numKilledEnemies++;
+						}
+					}
 
-					game.enemy[i].isAlive = false;
-					SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
-
-					game.numKilledEnemies++;
+					else if (game.gameSettings.choiñe & (1 << 1))
+					{
+						SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+						game.numKilledEnemies++;
+					}
 
 					if (game.gameSettings.choiñe & (1 << 2))
 					{

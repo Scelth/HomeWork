@@ -18,31 +18,63 @@ namespace Doom2D
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 			{
-				gameSettings.choiñe |= 1 << 0;
-				game.sound.settingsSound.play();
+				if (game.gameSettings.choiñe & (1 << 1))
+				{
+					game.sound.denySound.play();
+				}
+
+				else 
+				{
+					gameSettings.choiñe |= 1 << 0;
+					game.sound.settingsSound.play();
+				}
 			}
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 			{
-				gameSettings.choiñe |= 1 << 1;
-				game.sound.settingsSound.play();
+				if (game.gameSettings.choiñe & (1 << 0))
+				{
+					game.sound.denySound.play();
+				}
+
+				else
+				{
+					gameSettings.choiñe |= 1 << 1;
+					game.sound.settingsSound.play();
+				}
 			}
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
 			{
-				gameSettings.choiñe |= 1 << 2;
-				game.sound.settingsSound.play();
+				if (game.gameSettings.choiñe & (1 << 3))
+				{
+					game.sound.denySound.play();
+				}
+
+				else
+				{
+					gameSettings.choiñe |= 1 << 2;
+					game.sound.settingsSound.play();
+				}
 			}
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
 			{
-				gameSettings.choiñe |= 1 << 3;
-				game.sound.settingsSound.play();
+				if (game.gameSettings.choiñe & (1 << 2))
+				{
+					game.sound.denySound.play();
+				}
+
+				else
+				{
+					gameSettings.choiñe |= 1 << 3;
+					game.sound.settingsSound.play();
+				}
 			}
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
 			{
-				if (gameSettings.choiñe == 1 || gameSettings.choiñe == 2 || gameSettings.choiñe == 4 || gameSettings.choiñe == 8)
+				if ((gameSettings.choiñe != 5 && gameSettings.choiñe != 6 && gameSettings.choiñe != 9 && gameSettings.choiñe != 10))
 				{
 					game.sound.denySound.play();
 				}

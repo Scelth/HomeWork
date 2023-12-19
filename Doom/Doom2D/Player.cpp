@@ -6,7 +6,7 @@ namespace Doom2D
 	void InitPlayer(Player& player, const Game& game)
 	{
 		player.playerPosition = { SCREEN_WIDTH / 2.f, SCREEN_HEIGTH / 2.f };
-		player.playerSpeed = INITIAL_SPEED;
+		SetPlayerSpeed(player, INITIAL_SPEED);
 		player.playerDirection = PlayerDirection::Right;
 
 		player.playerSprite.setTexture(game.playerTexture);

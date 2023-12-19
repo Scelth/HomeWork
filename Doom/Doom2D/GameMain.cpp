@@ -44,5 +44,7 @@ int main()
 		window.display();
 	}
 
+	DeallocateEnemies(game.enemy);
+
 	return 0;
 }
