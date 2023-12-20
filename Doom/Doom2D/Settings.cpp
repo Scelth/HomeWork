@@ -79,16 +79,15 @@ namespace Doom2D
 					game.sound.denySound.play();
 				}
 
-				else if (gameSettings.choiñe == 0)
-				{
-					gameSettings.isSettingsChosen = false;
-					window.close();
-				}
-
 				else
 				{
 					gameSettings.isSettingsChosen = false;
 				}
+			}
+
+			else
+			{
+				HandleWindowEvents(window);
 			}
 		}
 	}
