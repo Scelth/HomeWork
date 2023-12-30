@@ -20,4 +20,5 @@ namespace Doom2D
 	short GetRandomEnemies(short maxEnemies);
 	void SetSpriteSize(sf::Sprite& sprite, float desiredWidth, float desiredHeight);
 	void SetSpriteOrigin(sf::Sprite& sprite, float originX, float originY);
+	//void CalcRecord(Game& game);
 }

@@ -12,6 +12,7 @@ namespace Doom2D
 		sf::Text totalScoreText;
 		sf::Text settingText;
 		sf::Text youWinText;
+		sf::Text recordText;
 	};
 
 	void InitText(GameText& text);

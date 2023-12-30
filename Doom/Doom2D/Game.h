@@ -7,6 +7,7 @@
 #include "Text.h"
 #include "Sound.h"
 #include "Settings.h"
+#include "Score.h"
 
 namespace Doom2D
 {
@@ -19,6 +20,7 @@ namespace Doom2D
 		GameText text;
 		GameSound sound;
 		GameSettings gameSettings;
+		GameScore gameScore;
 
 		sf::RectangleShape backgroundColor;
 
@@ -38,5 +40,5 @@ namespace Doom2D
 	void GameFinished(Game& game, float lastTime);
 	void UpdateGame(Game& game, float deltaTime, float lastTime, sf::RenderWindow& window);
 	void DrawGame(Game& game, sf::RenderWindow& window);
-	void HandleWindowEvents(sf::RenderWindow& window);
+	void HandleWindowEvents(Game& game, sf::RenderWindow& window);
 }

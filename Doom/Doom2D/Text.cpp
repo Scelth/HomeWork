@@ -30,6 +30,11 @@ namespace Doom2D
 		text.youWinText.setFillColor(sf::Color::White);
 		text.youWinText.setString("YOU WIN!");
 		text.youWinText.setPosition(SCREEN_WIDTH / 2.5f, SCREEN_HEIGTH / 2.5f);
+
+		text.recordText.setFont(text.font);
+		text.recordText.setCharacterSize(50);
+		text.recordText.setFillColor(sf::Color::White);
+		text.recordText.setPosition(SCREEN_WIDTH / 5.f, SCREEN_HEIGTH / 3.f);
 	}
 
 	void InitSettingsText(GameText& text)

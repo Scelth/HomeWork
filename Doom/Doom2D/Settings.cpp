@@ -87,7 +87,7 @@ namespace Doom2D
 
 			else
 			{
-				HandleWindowEvents(window);
+				HandleWindowEvents(game, window);
 			}
 		}
 	}

@@ -10,6 +10,7 @@
 #include "Sound.h"
 #include "Game.h"
 #include "Settings.h"
+#include "Score.h"
 
 int main()
 {
@@ -31,7 +32,7 @@ int main()
 
 	while (window.isOpen())
 	{
-		HandleWindowEvents(window);
+		HandleWindowEvents(game, window);
 
 		float currentTime = gameClock.getElapsedTime().asSeconds();
 		float deltaTime = currentTime - lastTime;

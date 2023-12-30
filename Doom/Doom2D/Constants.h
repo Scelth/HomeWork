@@ -15,7 +15,7 @@ namespace Doom2D
 	const float ENEMY_SIZE = 40.f;
 	const short NUM_OBSTACLES = 10;
 	const float OBSTACLE_SIZE = 40.f;
-	const float PAUSE_LENGH = 3.f;
+	const float PAUSE_LENGTH = 3.f;
 
 	extern short NUM_ENEMIES;
 }

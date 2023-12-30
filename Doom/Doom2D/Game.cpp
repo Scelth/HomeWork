@@ -114,19 +114,17 @@ namespace Doom2D
 
 		else
 		{
-			if (lastTime - game.gameFinishTime <= PAUSE_LENGH)
-			{
-				window.draw(game.text.gameOverText);
-				game.text.totalScoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
-				window.draw(game.text.totalScoreText);
-				window.display();
+			GenerateRecordTable(game.gameScore);
+			GetGameScore(game, game.text, window, "GameOver");
 
+			if (lastTime - game.gameFinishTime <= PAUSE_LENGTH)
+			{
 				game.sound.backgroundMusic.stop();
 				game.sound.gameOverSound.play();
 
 				while (game.sound.gameOverSound.getStatus() == sf::Sound::Playing)
 				{
-					sf::sleep(sf::milliseconds(5));
+					sf::sleep(sf::milliseconds(15));
 				}
 			}
 
@@ -163,17 +161,15 @@ namespace Doom2D
 
 		if ((game.numKilledEnemies == NUM_ENEMIES) && (game.gameSettings.choiñe & (1 << 0)))
 		{
-			window.draw(game.text.youWinText);
-			game.text.totalScoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
-			window.draw(game.text.totalScoreText);
-			window.display();
+			GenerateRecordTable(game.gameScore);
+			GetGameScore(game, game.text, window, "YouWin");
 
 			game.sound.backgroundMusic.stop();
 			game.sound.youWinSound.play();
 
 			while (game.sound.youWinSound.getStatus() == sf::Sound::Playing)
 			{
-				sf::sleep(sf::milliseconds(5));
+				sf::sleep(sf::milliseconds(15));
 			}
 
 			RestartGame(game);
@@ -188,7 +184,7 @@ namespace Doom2D
 		window.draw(game.text.inputHintText);
 	}
 
-	void HandleWindowEvents(sf::RenderWindow& window)
+	void HandleWindowEvents(Game& game, sf::RenderWindow& window)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -196,11 +192,13 @@ namespace Doom2D
 			// Close the window when clicking on the X or ESC
 			if (event.type == sf::Event::Closed)
 			{
+				DeallocateEnemies(game.enemy);
 				window.close();
 			}
 
 			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
 			{
+				DeallocateEnemies(game.enemy);
 				window.close();
 			}
 		}

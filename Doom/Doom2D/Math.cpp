@@ -47,4 +47,12 @@ namespace Doom2D
 		sf::FloatRect spriteRect = sprite.getLocalBounds();
 		sprite.setOrigin(originX * spriteRect.width, originY * spriteRect.height);
 	}
+
+	//void CalcRecord(Game& game)
+	//{
+	//	if ((game.gameScore.playerScore < game.numKilledEnemies) || game.gameScore.playerScore == 0)
+	//	{
+	//		game.gameScore.playerScore = game.numKilledEnemies;
+	//	}
+	//}
 }
