@@ -17,63 +17,77 @@ namespace Doom2D
 
 		text.totalScoreText.setString("Demons killed: " + std::to_string(game.numKilledEnemies));
         UpdatePlayerScore(game.gameScore, game);
-        DisplayRecordTable(text, game.gameScore, window);
+        DisplayRecordTable(text, game.gameScore, game, window);
 		window.draw(text.totalScoreText);
 		window.display();
 	}
 
-    bool operator<(const PlayersData& left, const PlayersData& right)
+    void GenerateRecordTable(GameScore& gameScore, Game& game)
     {
-        return left.playersScore > right.playersScore;
-    }
-
-    void GenerateRecordTable(GameScore& gameScore)
-    {
-        gameScore.playersData.clear();
-
-        PlayersData playersInit[] = {
-            {"Player1", rand() % 20 + 1},
-            {"Player2", rand() % 20 + 1},
-            {"Player3", rand() % 20 + 1},
-            {"Player4", rand() % 20 + 1},
-            {"Player5", rand() % 20 + 1},
-        };
-
-        const auto playersInitSize = sizeof(playersInit) / sizeof(playersInit[0]);
-        PlayersData players[playersInitSize];
-        
-        for (int i = 0; i < playersInitSize; i++)
+        if (game.gameSettings.choiñe & (1 << 0))
         {
-            gameScore.playersData.push_back(playersInit[i]);
+            gameScore.recordTable =
+            {
+                {"Player1", rand() % 20 + 1},
+                {"Player2", rand() % 20 + 1},
+                {"Player3", rand() % 20 + 1},
+                {"Player4", rand() % 20 + 1},
+                {"Player5", rand() % 20 + 1}
+            };
+        }
+
+        else if (game.gameSettings.choiñe & (1 << 1))
+        {
+            gameScore.recordTable =
+            {
+                {"Player1", rand()},
+                {"Player2", rand()},
+                {"Player3", rand()},
+                {"Player4", rand()},
+                {"Player5", rand()}
+            };
         }
     }
 
-    void DisplayRecordTable(GameText& text, GameScore& gameScore, sf::RenderWindow& window)
+    void DisplayRecordTable(GameText& text, GameScore& gameScore, Game& game, sf::RenderWindow& window)
     {
-        std::string recordString = "Records:\n";
-        std::sort(gameScore.playersData.begin(), gameScore.playersData.end());
-
-        for (const auto& entry : gameScore.playersData)
+        if (game.gameSettings.choiñe & (1 << 4))
         {
-            recordString += entry.playersNames + ": " + std::to_string(entry.playersScore) + "\n";
+            std::string recordString;
+            std::multimap<int, std::string, std::greater<int>> scoreMap;
+
+            for (const auto& item : gameScore.recordTable)
+            {
+                scoreMap.insert(std::make_pair(item.second, item.first));
+            }
+
+            if (game.gameSettings.choiñe & (1 << 0))
+            {
+                recordString = "Records with an finite number of enemies:\n";
+            }
+
+            else if (game.gameSettings.choiñe & (1 << 1))
+            {
+                recordString = "Records with an infinite number of enemies:\n";
+            }
+
+            for (const auto& item : scoreMap)
+            {
+                recordString += item.second + ": " + std::to_string(item.first) + "\n";
+            }
+
+            text.recordText.setString(recordString);
+            window.draw(text.recordText);
         }
-
-        text.recordText.setString(recordString);
-        window.draw(text.recordText);
     }
-
 
     void UpdatePlayerScore(GameScore& gameScore, Game& game)
     {
-        for (const auto& entry : gameScore.playersData)
+        if ((gameScore.yourScore < game.numKilledEnemies) || gameScore.yourScore == 0)
         {
-            if ((gameScore.yourScore < game.numKilledEnemies) || gameScore.yourScore == 0)
-            {
-                gameScore.yourScore = game.numKilledEnemies;
-            }
+            gameScore.yourScore = game.numKilledEnemies;
         }
 
-        gameScore.playersData.push_back({ "You", gameScore.yourScore });
+        gameScore.recordTable["You"] = gameScore.yourScore;
     }
-
 }

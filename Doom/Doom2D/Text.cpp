@@ -44,7 +44,7 @@ namespace Doom2D
 		text.settingText.setFont(text.font);
 		text.settingText.setCharacterSize(30);
 		text.settingText.setFillColor(sf::Color::White);
-		text.settingText.setString("SELECT SETTINGS \n\nChoose two options \n1 - With finite number of enemies. \n2 - With infinite number of enemies. \n3 - With player acceleration. \n4 - Without player acceleration. \n0 - Exit the settings. \n\nESC - Exit the game.");
+		text.settingText.setString("SELECT SETTINGS \n\nChoose two or three options \n1 - With finite number of enemies. \n2 - With infinite number of enemies. \n3 - With player acceleration. \n4 - Without player acceleration. \n5 - Show record table. \n0 - Exit the settings. \n\nESC - Exit the game.");
 		text.settingText.setPosition(SCREEN_WIDTH / 2.5f, SCREEN_HEIGTH / 2.5f);
 	}
 }

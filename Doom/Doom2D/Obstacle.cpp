@@ -15,6 +15,19 @@ namespace Doom2D
 		obstacle.obstaclePosition = position;
 	}
 
+	void CreateObstacles(Game& game)
+	{
+		game.obstacle.clear();
+
+		Obstacle obstacle;
+
+		for (int i = 0; i < NUM_OBSTACLES; ++i)
+		{
+			InitObstacle(obstacle, game);
+			game.obstacle[i] = obstacle;
+		}
+	}
+
 	void DrawObstacle(Obstacle& obstacle, sf::RenderWindow& window)
 	{
 		obstacle.obstacleSprite.setPosition(obstacle.obstaclePosition.X, obstacle.obstaclePosition.Y);

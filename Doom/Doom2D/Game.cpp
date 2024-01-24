@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <fstream>
 
 namespace Doom2D
 {
@@ -7,19 +8,20 @@ namespace Doom2D
 	// Function to restart the game
 	void RestartGame(Game& game)
 	{
-		CreateEnemies(game.enemy, game);
+		CreateEnemies(game);
+		CreateObstacles(game);
 
 		InitBackground(game.background, game);
 		InitPlayer(game.player, game);
 
-		for (int i = 0; i < NUM_ENEMIES; i++)
+		for (auto& item : game.enemy)
 		{
-			SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+			SetEnemyPosition(item.second, GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 		}
 
-		for (int i = 0; i < NUM_OBSTACLES; i++)
+		for (auto& item : game.obstacle)
 		{
-			SetObstaclePosition(game.obstacle[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+			SetObstaclePosition(item.second, GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 		}
 
 		InitText(game.text);
@@ -38,9 +40,9 @@ namespace Doom2D
 		game.enemyTexture.loadFromFile(RESOURCES_PATH + "Assets/Enemy.png");
 		game.obstacleTexture.loadFromFile(RESOURCES_PATH + "Assets/Fire.png");
 
-		for (int i = 0; i < NUM_OBSTACLES; ++i)
+		for (auto& item : game.obstacle)
 		{
-			InitObstacle(game.obstacle[i], game);
+			InitObstacle(item.second, game);
 		}
 
 		RestartGame(game);
@@ -66,29 +68,35 @@ namespace Doom2D
 			}
 
 			// A loop to create a collision of enemies
-			for (int i = 0; i < NUM_ENEMIES; i++)
+			for (auto& item : game.enemy)
 			{
-				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.enemy[i].enemyPosition, ENEMY_SIZE))
+				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, item.second.enemyPosition, ENEMY_SIZE))
 				{
+					std::ofstream logFile("log.txt", std::ios_base::app); // Open the log file in append mode
+
 					if (game.gameSettings.choiñe & (1 << 0))
 					{
-						if (game.enemy[i].isAlive)
+						if (item.second.isAlive)
 						{
-							game.enemy[i].isAlive = false;
-							SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+							item.second.isAlive = false;
+							SetEnemyPosition(item.second, GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 							game.numKilledEnemies++;
 						}
 					}
 
 					else if (game.gameSettings.choiñe & (1 << 1))
 					{
-						SetEnemyPosition(game.enemy[i], GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
+						SetEnemyPosition(item.second, GetRandomPosition(SCREEN_WIDTH, SCREEN_HEIGTH));
 						game.numKilledEnemies++;
 					}
 
 					if (game.gameSettings.choiñe & (1 << 2))
 					{
-						SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
+						if (GetPlayerSpeed(game.player) < 1000)
+						{
+							SetPlayerSpeed(game.player, GetPlayerSpeed(game.player) + ACCELERATION);
+							logFile << "Player Speed: " << GetPlayerSpeed(game.player) << "\n";
+						}
 					}
 
 					else if (game.gameSettings.choiñe & (1 << 3))
@@ -103,9 +111,9 @@ namespace Doom2D
 			}
 
 			// A cycle for creating a collision of obstacles
-			for (int i = 0; i < NUM_OBSTACLES; i++)
+			for (auto& item : game.obstacle)
 			{
-				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, game.obstacle[i].obstaclePosition, OBSTACLE_SIZE))
+				if (IsRectangleCircleCollide(game.player.playerPosition, PLAYER_SIZE, item.second.obstaclePosition, OBSTACLE_SIZE))
 				{
 					GameFinished(game, lastTime);
 				}
@@ -114,7 +122,7 @@ namespace Doom2D
 
 		else
 		{
-			GenerateRecordTable(game.gameScore);
+			GenerateRecordTable(game.gameScore, game);
 			GetGameScore(game, game.text, window, "GameOver");
 
 			if (lastTime - game.gameFinishTime <= PAUSE_LENGTH)
@@ -143,25 +151,25 @@ namespace Doom2D
 		game.text.inputHintText.setPosition(window.getSize().x - 450.f, 10.f);
 		DrawPlayer(game.player, window);
 
-		for (int i = 0; i < NUM_ENEMIES; i++)
+		for (auto& item : game.enemy)
 		{
 			if (game.gameSettings.choiñe & (1 << 0))
 			{
-				if (game.enemy[i].isAlive)
+				if (item.second.isAlive)
 				{
-					DrawEnemy(game.enemy[i], window);
+					DrawEnemy(item.second, window);
 				}
 			}
 
 			else if (game.gameSettings.choiñe & (1 << 1))
 			{
-				DrawEnemy(game.enemy[i], window);
+				DrawEnemy(item.second, window);
 			}
 		}
 
 		if ((game.numKilledEnemies == NUM_ENEMIES) && (game.gameSettings.choiñe & (1 << 0)))
 		{
-			GenerateRecordTable(game.gameScore);
+			GenerateRecordTable(game.gameScore, game);
 			GetGameScore(game, game.text, window, "YouWin");
 
 			game.sound.backgroundMusic.stop();
@@ -175,9 +183,9 @@ namespace Doom2D
 			RestartGame(game);
 		}
 
-		for (int i = 0; i < NUM_OBSTACLES; i++)
+		for (auto& item : game.obstacle)
 		{
-			DrawObstacle(game.obstacle[i], window);
+			DrawObstacle(item.second, window);
 		}
 
 		window.draw(game.text.scoreText);
@@ -192,13 +200,11 @@ namespace Doom2D
 			// Close the window when clicking on the X or ESC
 			if (event.type == sf::Event::Closed)
 			{
-				DeallocateEnemies(game.enemy);
 				window.close();
 			}
 
 			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
 			{
-				DeallocateEnemies(game.enemy);
 				window.close();
 			}
 		}

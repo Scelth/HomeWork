@@ -15,4 +15,5 @@ namespace Doom2D
 	void InitObstacle(Obstacle& obstacle, const Game& game);
 	void SetObstaclePosition(Obstacle& obstacle, const Position2D& position);
 	void DrawObstacle(Obstacle& obstacle, sf::RenderWindow& window);
+	void CreateObstacles(Game& game);
 }

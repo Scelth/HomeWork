@@ -8,6 +8,7 @@
 #include "Sound.h"
 #include "Settings.h"
 #include "Score.h"
+#include <unordered_map>
 
 namespace Doom2D
 {
@@ -15,8 +16,9 @@ namespace Doom2D
 	{
 		Player player;
 		Background background;
-		Enemy* enemy = nullptr;
-		Obstacle obstacle[NUM_OBSTACLES];
+		std::unordered_map<int, Enemy> enemy;
+		std::unordered_map<int, Obstacle> obstacle;
+		//Obstacle obstacle[NUM_OBSTACLES];
 		GameText text;
 		GameSound sound;
 		GameSettings gameSettings;

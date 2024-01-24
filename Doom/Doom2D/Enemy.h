@@ -17,6 +17,5 @@ namespace Doom2D
 	void InitEnemy(Enemy& enemy, const Game& game);
 	void SetEnemyPosition(Enemy& enemy, const Position2D& position);
 	void DrawEnemy(Enemy& enemy, sf::RenderWindow& window);
-	void CreateEnemies(Enemy*& enemy, const Game& game);
-	void DeallocateEnemies(Enemy*& enemy);
+	void CreateEnemies(Game& game);
 }

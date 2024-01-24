@@ -72,9 +72,22 @@ namespace Doom2D
 				}
 			}
 
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
+			{
+				gameSettings.choiñe |= 1 << 4;
+				game.sound.settingsSound.play();
+			}
+
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
 			{
-				if ((gameSettings.choiñe != 5 && gameSettings.choiñe != 6 && gameSettings.choiñe != 9 && gameSettings.choiñe != 10))
+				if (gameSettings.choiñe != 5 && 
+					gameSettings.choiñe != 6 && 
+					gameSettings.choiñe != 9 && 
+					gameSettings.choiñe != 10 &&
+					gameSettings.choiñe != 21 &&
+					gameSettings.choiñe != 22 &&
+					gameSettings.choiñe != 25 &&
+					gameSettings.choiñe != 26)
 				{
 					game.sound.denySound.play();
 				}
