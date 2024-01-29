@@ -122,7 +122,6 @@ namespace Doom2D
 
 		else
 		{
-			GenerateRecordTable(game.gameScore, game);
 			GetGameScore(game, game.text, window, "GameOver");
 
 			if (lastTime - game.gameFinishTime <= PAUSE_LENGTH)
@@ -169,7 +168,6 @@ namespace Doom2D
 
 		if ((game.numKilledEnemies == NUM_ENEMIES) && (game.gameSettings.choiñe & (1 << 0)))
 		{
-			GenerateRecordTable(game.gameScore, game);
 			GetGameScore(game, game.text, window, "YouWin");
 
 			game.sound.backgroundMusic.stop();

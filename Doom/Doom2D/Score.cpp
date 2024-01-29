@@ -63,7 +63,7 @@ namespace Doom2D
 
             if (game.gameSettings.choiñe & (1 << 0))
             {
-                recordString = "Records with an finite number of enemies:\n";
+                recordString = "Records with a finite number of enemies:\n";
             }
 
             else if (game.gameSettings.choiñe & (1 << 1))

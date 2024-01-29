@@ -18,7 +18,7 @@ namespace Doom2D
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 			{
-				if (game.gameSettings.choiñe & (1 << 1))
+				if (gameSettings.choiñe & (1 << 1))
 				{
 					game.sound.denySound.play();
 				}
@@ -32,7 +32,7 @@ namespace Doom2D
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 			{
-				if (game.gameSettings.choiñe & (1 << 0))
+				if (gameSettings.choiñe & (1 << 0))
 				{
 					game.sound.denySound.play();
 				}
@@ -46,7 +46,7 @@ namespace Doom2D
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
 			{
-				if (game.gameSettings.choiñe & (1 << 3))
+				if (gameSettings.choiñe & (1 << 3))
 				{
 					game.sound.denySound.play();
 				}
@@ -60,7 +60,7 @@ namespace Doom2D
 
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
 			{
-				if (game.gameSettings.choiñe & (1 << 2))
+				if (gameSettings.choiñe & (1 << 2))
 				{
 					game.sound.denySound.play();
 				}
@@ -94,6 +94,11 @@ namespace Doom2D
 
 				else
 				{
+					if (gameSettings.choiñe & (1 << 4))
+					{
+						GenerateRecordTable(game.gameScore, game);
+					}
+
 					gameSettings.isSettingsChosen = false;
 				}
 			}
