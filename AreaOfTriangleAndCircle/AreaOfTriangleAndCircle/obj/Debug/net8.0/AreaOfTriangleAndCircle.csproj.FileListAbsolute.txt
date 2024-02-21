@@ -1,0 +1,12 @@
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\bin\Debug\net8.0\AreaOfTriangleAndCircle.deps.json
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\bin\Debug\net8.0\AreaOfTriangleAndCircle.dll
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\bin\Debug\net8.0\AreaOfTriangleAndCircle.pdb
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.AssemblyInfo.cs
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.sourcelink.json
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.dll
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\refint\AreaOfTriangleAndCircle.dll
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\AreaOfTriangleAndCircle.pdb
+C:\Users\user\source\repos\HomeWork\AreaOfTriangleAndCircle\AreaOfTriangleAndCircle\obj\Debug\net8.0\ref\AreaOfTriangleAndCircle.dll
